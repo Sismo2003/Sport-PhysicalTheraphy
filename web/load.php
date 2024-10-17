@@ -10,7 +10,7 @@
 
         <script src="resources/js/jquery-3.7.1.js"></script>
 
-        <script src="../../node_modules/chart.js/dist/chart.umd.js"></script>
+        <script src="../node_modules/chart.js/dist/chart.umd.js"></script>
         <script src="resources/js/datatables.min.css"></script>
         <script src="resources/js/datatables.min.js"></script>
         <script src="resources/js/dashboard.js"></script>
