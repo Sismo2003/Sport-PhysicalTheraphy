@@ -18,7 +18,6 @@ function loadContent(url){
 // carga de pagina web, siempre cargamos el index de admin
 document.addEventListener('DOMContentLoaded', function(){
     loadContent('pages/admin/dashboard/index.php');
-    alert('cargo');
 })
 
 function openModal(id) {
