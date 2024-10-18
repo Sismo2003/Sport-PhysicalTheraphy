@@ -14,7 +14,7 @@ function loadContent(url){
             console.error('Error al cargar el archivo:', error);
         }
     });
-}
+} 
 // carga de pagina web, siempre cargamos el index de admin
 document.addEventListener('DOMContentLoaded', function(){
 

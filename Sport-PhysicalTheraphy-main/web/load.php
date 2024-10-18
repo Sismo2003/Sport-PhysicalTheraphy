@@ -13,6 +13,7 @@
         <script src="resources/js/dashboard.js"></script>
         <script src="../node_modules/flowbite/dist/flowbite.min.js"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@9.0.3"></script>
     </head>
     <body class="bg-slate-100 ">
     <div class="flex w-full h-full">

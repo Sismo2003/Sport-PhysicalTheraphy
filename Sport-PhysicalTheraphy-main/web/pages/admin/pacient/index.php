@@ -23,34 +23,27 @@
 
     <!--- TABLE--->
     <div class="col-span-2">
-        <table  id="miTabla" class="display  ">
-            <thead class="">
-            <tr class="text-gray-700">
-                <th class=" p-2  bg-custom-gray rounded-tl-md rounded-bl-md">NOMBRE</th>
-                <th class=" p-2  bg-custom-gray " >TELEFONO</th>
-                <th class=" p-2  bg-custom-gray " >VISITA</th>
-                <th class=" p-2  bg-custom-gray " >TRATAMIENTO</th>
-                <th class=" p-2  bg-custom-gray " >SINTOMAS</th>
-                <th class=" p-2 bg-custom-gray  rounded-tr-md rounded-tr-md " >Detalles</th>
-            </tr>
+        <table id="search-table">
+            <thead>
+                <tr>
+                    <th>
+                        <span class="flex items-center">
+                            NOMBRE
+                        </span>
+                    </th>
+                    <th>
+                        <span class="flex items-center">
+                            TELEFONO
+                        </span>
+                    </th>
+                    <th>
+                        <span class="flex items-center">
+                            CORREO
+                        </span>
+                    </th>
+                </tr>
             </thead>
-            <tbody>
-            <tr class="border-b-2 border-gray-200 text-center">
-                <td class="p-5" >Alexis Ortiz</td>
-                <td class="p-5" >3334108254</td>
-                <td class="p-5" >lele pancha</td>
-                <td class="p-5" >Paracetamol</td>
-                <td class="p-5" >Diarrea</td>
-                <td class="p-5" >iker come kk</td>
-            </tr>
-            <tr class="border-b-2 border-gray-200 text-center">
-                <td class="p-5" >Iker famos0</td>
-                <td class="p-5" >33-no-me-se-tu-NUm</td>
-                <td class="p-5" >siempre trae alergia</td>
-                <td class="p-5" >Loratadina</td>
-                <td class="p-5" >Un chingo de moco</td>
-                <td class="p-5" >t amo</td>
-            </tr>
+            <tbody id="pacientsTableLoad">
             </tbody>
         </table>
     </div>
@@ -220,7 +213,45 @@
                     .addClass('border-2 border-teal-500 rounded-md p-2 bg-gray-100 text-gray-800');
             }
         });
+        $.ajax({
+            url: 'https://5.161.211.225/v4/web/pages/admin/dashboard/endpoint/getPacients.php',
+            method: 'GET',
+            success: function(res) {
+                console.log(res);
+                if (res.state) {
+                    // Recorre los datos y llena la tabla
+                    $.each(res.data, function(index, value) {
+                        $('#pacientsTableLoad').append(
+                            `
+                            <tr class="border-b-2 border-gray-200 text-center">
+                                <td class="p-5">` + (value.nombre + ' ' + (value.apellido ? value.apellido : "")) + `</td>
+                                <td class="p-5">` + (value.telefono ? value.telefono : '') + `</td>
+                                <td class="p-5">` + (value.correo_electronico ? value.correo_electronico : '') + `</td>
+                            </tr>
+                            `
+                        );
+                    });
+
+                    // Inicializa DataTable aquí
+                    const dataTable = new simpleDatatables.DataTable("#search-table", {
+                        searchable: true,
+                        sortable: false
+                    });
+                } else {
+                    swal({
+                        title: "Base de datos vacía",
+                        text: res.message,
+                        icon: "warning",
+                    });
+                }
+            },
+            error: function(res) {
+                swal({
+                    title: "Error interno 500!",
+                    text: res.message,
+                    icon: "warning",
+                });
+            }
+        });
     });
 </script>
-
-
