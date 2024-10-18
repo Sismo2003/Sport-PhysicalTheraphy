@@ -14,34 +14,41 @@ function validateData(event) {
 
     sendForm();
 }
-
 function sendForm() {
+
     const username = $('#username').val();
     const password = $('#password').val();
     const formData = {
         username,
         password
     };
-
     $.ajax({
         url: "https://5.161.211.225/v4/web/services/login.php",
         type: "POST",
         data: formData,
         success: function(res) {
-            const ans = JSON.parse(res);
-            if (ans[0] === 0) { // Si es un error
-                if (ans[1] == 'User not found') {
-                    alert('Datos de usuario incorrectos!');
-                } else {
-                    alert('Error durante la consulta: ' + ans[1]);
+            if(res.status){
+                if(res.login){
+                    window.location = 'load.php';
+                }else{
+                    const username = $('#username').val('');
+                    const password = $('#password').val('');
+                    swal({
+                        text: 'Por favor, verifica tu usuario y contraseña.',
+                        title: "Credenciales Incorrectas",
+                        icon: "warning",
+                        dangerMode: true
+                    })
                 }
-            }else{
-                window.location = 'start.php';
-
             }
         },
-        error: function() {
-            alert('Inicio de sesión fallido');
+        error: function(res) {
+            swal({
+                title: "Error 500 Interno en el servidor!",
+                text: "Error: Contacte a su administrador. ",
+                icon: "warning",
+                dangerMode: true
+            })
         }
     });
 }
