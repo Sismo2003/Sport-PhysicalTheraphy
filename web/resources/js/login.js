@@ -22,8 +22,9 @@ function sendForm() {
         username,
         password
     };
+
     $.ajax({
-        url: "services/sing_in.php",
+        url: "https://5.161.211.225/v4/web/services/login.php",
         type: "POST",
         data: formData,
         success: function(res) {

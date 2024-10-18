@@ -19,7 +19,7 @@
             </div>
             <div class="flex  ">
                 <div>
-                    <p class="text-2xl font-medium mt-3 ">80</p>
+                    <p class="text-2xl font-medium mt-3" id="dailyAppointmentsP"></p>
                     <p class="text-gray-400 text-md w-full text-nowrap">Consultas a lo largo del día</p>
                 </div>
                 <canvas id="appointments-chart-dashboard" class="relative mt-10 ml-4" style="width: 360px; height: 68px;" >
@@ -85,62 +85,164 @@
         <div class="rounder-lg border-2 border-gray-200 rounded-lg p-5 space-y-1 ">
             <p class="text-xl font-bold mt-3 ">Pacientes</p>
             <p class="text-md text-gray-500 ">Estos son tus pacientes más recientes</p>
-            <table class="display" id="pacientsTableDs" >
+            <table class="display text-center" id="pacientsTableDs" >
                 <thead>
                     <tr class="text-gray-700">
-                        <th class=" p-2  bg-custom-gray rounded-tl-md ">Nombre</th>
-                        <th class=" p-2  bg-custom-gray " >Telefono</th>
-                        <th class=" p-2  bg-custom-gray " >Edad</th>
-                        <th class=" p-2  bg-custom-gray " >Motivo De Consulta</th>
-                        <th class=" p-2 bg-custom-gray  rounded-tr-md " >Detalles</th>
+                        <th class=" py-2 px-8   bg-custom-gray rounded-tl-md ">Codigo</th>
+                        <th class=" py-2 px-8   bg-custom-gray ">Nombre</th>
+                        <th class=" p-2  px-8   bg-custom-gray " >Edad</th>
+                        <th class=" p-2  px-8   bg-custom-gray " >Telefono</th>
+                        <th class=" p-2  px-8   bg-custom-gray rounded-tr-md" >Ultima Visita</th>
+<!--                        <th class=" p-2 bg-custom-gray  rounded-tr-md " >Detalles</th>-->
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <th class="p-3 text-gray-500">Iker cabeceando</th>
-                        <th class="p-3 text-gray-500">Cabeceo</th>
-                        <th class="p-3 text-gray-500">20</th>
-                        <th class="p-3 text-gray-500">C-A-B-E-C-E-O</th>
-                        <th class="p-3 text-gray-500">Ponte pilas</th>
-                    </tr>
+                <tbody id="pacientsTableLoadContent">
+
                 </tbody>
             </table>
         </div>
         <div class="rounder-lg border-2 border-gray-200 rounded-lg p-5 ">
+            <p class="text-xl font-bold mt-3 ">Medicos</p>
+            <p class="text-md text-gray-500 ">Estos son los medicos mas recientes</p>
+            <table class="display tect-center" id="medicTableDs" >
+                <thead>
+                <tr class="text-gray-700">
+                    <th class=" py-2 px-8   bg-custom-gray rounded-tl-md ">Codigo</th>
+                    <th class=" p-2  px-8   bg-custom-gray " >Nombre</th>
+                    <th class=" p-2  px-8   bg-custom-gray " >Telefono</th>
+                    <th class=" p-2  px-8   bg-custom-gray rounded-tr-md" >Especialidad</th>
+                    <!--                        <th class=" p-2 bg-custom-gray  rounded-tr-md " >Detalles</th>-->
+                </tr>
+                </thead>
+                <tbody id="medicTableLoadContent">
 
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
 
 <script>
+    // $('#pacientsTableDs').DataTable({
+    //     // "order": [[0, "DESC"]],
+    //     "paging": true,
+    //     "pageLength" : 15,
+    //     "lengthChange": true,
+    //     "language": { // Personalizar el texto de la interfaz
+    //         // "search": "",
+    //         // "lengthMenu": "Mostrar _MENU_ filas",
+    //         // "infoEmpty": "No hay entradas disponibles",
+    //         // "paginate": {
+    //         //     "first": "Primero",
+    //         //     "last": "Último",
+    //         //     "next": "Siguiente",
+    //         //     "previous": "Anterior"
+    //         // }
+    //     }
+    // });
     $(document).ready(function() {
-
-        $('#pacientsTableDs').DataTable({
-            "order": [[0, "asc"]],
-            "paging": true,
-            "pageLength" : 10,
-            "lengthChange": false,
-            "language": { // Personalizar el texto de la interfaz
-                "search": "",
-                "lengthMenu": "Mostrar _MENU_ filas",
-                "infoEmpty": "No hay entradas disponibles",
-                // "paginate": {
-                //     "first": "Primero",
-                //     "last": "Último",
-                //     "next": "Siguiente",
-                //     "previous": "Anterior"
-                // }
+        $.ajax({
+            url : 'https://5.161.211.225/v4/web/pages/admin/dashboard/endpoint/getPacients.php',
+            method : 'GET',
+            success : function(res){
+                console.log(res)
+                if(res.state){
+                    // data: res.data.map(function(value) {
+                    //     return [
+                    //         (value.nombre + ' ' + (value.apellido ? value.apellido : " ")) ,
+                    //         value.edad ? value.edad  : ' ',
+                    //         value.telefono ? value.telefono : value.celular,
+                    //         formatDate(value.fecha_ult_visita)
+                    //     ];
+                    // }),
+                    $.each(res.data, function(index, value) {
+                        $('#pacientsTableLoadContent').append(
+                            `
+                            <tr class="border-b-2 border-gray-200 hover:bg-gray-400">
+                                <th class="p-2   text-md font-medium text-gray-600">`+ (value.codigo) +`</th>
+                                <th class="p-2   text-md font-medium text-gray-600">`+ (value.nombre + ' ' + (value.apellido ? value.apellido : " ")) +`</th>
+                                <th class="p-2   text-md font-medium text-gray-600">` + (value.edad ? value.edad : ' ') + `</th>
+                                <th class="p-2   text-md font-medium text-gray-600">`+ (value.telefono ? value.telefono : value.celular) +`</th>
+                                <th class="p-2   text-md font-medium text-gray-600">`+ (formatDate(value.fecha_ult_visita)) +`</th>
+                            </tr>
+                            `
+                        )
+                    });
+                }else{
+                    swal({
+                        title: "Base de datos vacia",
+                        text: res.message,
+                        icon: "warning",
+                    });
+                }
             },
+            error: function(res) {
+                swal({
+                    title: "Error interno 500!",
+                    text: res.message,
+                    icon: "warning",
+                });
+            }
         });
-        $('.dt-search').addClass("flex justify-end m-3 p-3 ");
-        $('#dt-search-3').addClass("rounded-xl rounded-principal w-72");
-        $('#dt-search-20').attr('placeholder', 'Buscar...');
-        $('.dataTables_filter label').contents().filter(function() {
-            return this.nodeType === 3;
-        }).remove();
+        $.ajax({
+            url : 'https://5.161.211.225/v4/web/pages/admin/dashboard/endpoint/pacientCount.php',
+            method : 'GET',
+            success : function(res){
+                console.log(res)
+                if(res.state){
+                    $('#dailyAppointmentsP').html(res.total_pacientes)
+                }
+            },
+            error: function(res) {
+                swal({
+                    title: "Error interno 500!",
+                    text: res.message,
+                    icon: "warning",
+                });
+            }
+        });
+        $.ajax({
+            url : 'https://5.161.211.225/v4/web/pages/admin/dashboard/endpoint/getMedic.php',
+            method : 'GET',
+            success : function(res){
+                console.log(res)
+                if(res.state){
+                    $.each(res.data, function(index, value) {
+                        $('#medicTableLoadContent').append(
+                            `
+                            <tr class="border-b-2 border-gray-200 hover:bg-gray-400">
+                                <th class="p-2  text-md font-medium text-gray-600">`+value.codigo+`</th>
+                                <th class="p-2  text-md font-medium text-gray-600">`+ (value.nombre + ' ' + (value.apellido ? value.apellido : " ")) +`</th>
+                                <th class="p-2  text-md font-medium text-gray-600">`+ (value.telefono ? value.telefono : value.celular) +`</th>
+                                <th class="p-2  text-md font-medium text-gray-600">`+value.especialidad+`</th>
+                            </tr>
+                            `
+                        )
+                    });
 
-        $('#dt-search-2').addClass("rounded-xl rounded-principal"); // input de datatables
+                }else{
+                    swal({
+                        title: "Base de datos vacia",
+                        text: res.message,
+                        icon: "warning",
+                    });
+                }
+            },
 
+            error: function(res) {
+                swal({
+                    title: "Error interno 500!",
+                    text: res.message,
+                    icon: "warning",
+                });
+            }
+        });
+        function formatDate(dateString) {
+            if (!dateString) return ''; // Retorna una cadena vacía si dateString es null o undefined
+            const [date, time] = dateString.split(' ');
+            const [year, month, day] = date.split('-');
+            return `${day} ${month} ${year} ${time.substring(0, 5)}`; // Formato deseado
+        }
 
 
         createChart();

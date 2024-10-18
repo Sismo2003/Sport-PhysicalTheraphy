@@ -7,12 +7,11 @@ define("PASS_BD",'spt');
 
 
 function connection(){
-    $con = new mysqli(HOST,USER_BD,PASS_BD,BD);
-    if($con->connect_error){
-        die("Fail connection: " . $con->connect_error);
+    $con = new PDO(HOST,USER_BD,PASS_BD,BD);
+    $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    if(PDOException ) {
+        die("Fail connection: " . PDOException);
     }else{
         return $con;
     }
 }
-
-?>
