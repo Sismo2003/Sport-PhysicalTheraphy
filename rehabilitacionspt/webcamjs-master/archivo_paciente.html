@@ -1,0 +1,586 @@
+<div class="container mt-2">
+    <form id="crear-archivo-form">
+        <div class="step-container">
+            <div class="row">
+                <!-- Contenedor de la imagen con capa oscura centrado -->
+                <div class="mx-auto" style="position: relative; background-image: url('/assets/img/6.jpg'); width: 90%; height: 20rem; border-radius: 5px; background-size: cover; background-position: center; background-repeat: no-repeat;">
+                    <!-- Capa oscura solo sobre la imagen -->
+                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.3); border-radius: 5px;"></div>
+                        <div class="d-flex align-items-center" style="position: absolute; bottom: -7rem;">
+                            <div>
+                                <!-- Imagen redonda a la izquierda -->
+                                <div style="width: 10rem; height: 10rem; border-radius: 50%; overflow: hidden;">
+                                    <img id="fotografia" src="" style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                                <div>
+                                    <p style="text-align: center;" id="codigo" name="codigo">SPT163</p>
+                                </div>
+                            </div>
+                            <!-- Texto a la derecha de la imagen -->
+                            <div style="margin-top: 5rem;">
+                                <h2 id="nombre" class="text-left"></h2>
+                            </div>
+                        </div>
+                </div>
+
+                <!------------------------step 1-------------------------->
+                <div class="mx-auto mb-5 step active" style=" width: 90%; height: auto;" id="step-1">
+                    <div class="row" style="background-color: white; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                        <div class="col-md-12 mb-4">
+                            <div style="width: auto; height: 10rem;"></div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label for="antecedentes-quirurgicos" class="text-center d-block">Atecedentes Quirurgicos</label>
+                            <input type="text" class="form-control" id="antecedentes-quirurgicos" name="antecedentes-quirurgicos" placeholder="Atecedentes Quirurgicos" >
+                            <input type="hidden" id="codigo1" name="codigo1" value="valor_del_codigo" />
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label for="antecedentes-patologicos" class="text-center d-block">Atecedentes Patologicos</label>
+                            <input type="text" class="form-control" id="antecedentes-patologicos" name="antecedentes-patologicos" placeholder="Atecedentes Patologicos" >
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <label for="alcohol" class="text-center d-block">Alcohol</label>
+                            <input class="form-check-input d-block mx-auto" type="checkbox" value="si" id="alcohol" name="alcohol" style="width: 2rem; height: 2rem;">
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <label for="fuma" class="text-center d-block">Fuma</label>
+                            <input class="form-check-input d-block mx-auto" type="checkbox" value="si" id="fuma" name="fuma" style="width: 2rem; height: 2rem;">
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <label for="estupefaciente" class="text-center d-block">Estupefaciente</label>
+                            <input class="form-check-input d-block mx-auto" type="checkbox" value="si" id="estupefaciente" name="estupefaciente" style="width: 2rem; height: 2rem;">
+                        </div>
+                        <div class="col-md-12 mb-4">
+                            <label for="medicamentos" class="text-left d-block">Medicamentos</label>
+                            <textarea class="form-control" id="medicamentos" name="medicamentos" rows="5" placeholder="MEDICAMENTOS" ></textarea>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label for="codigo" class="text-center d-block">Signos, Sintomas, y Mecanismo de Lesion</label>
+                            <textarea class="form-control" id="sintomas" name="sintomas" rows="5" placeholder="DESCRIBELOS" ></textarea>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label for="sintomas" class="text-center d-block">Solicitud de estudios</label>
+                            <textarea class="form-control" id="estudios" name="estudios" rows="5" placeholder="ESTUDIOS" ></textarea>
+                        </div>
+                        <div class="col-md-12 mb-4">
+                            <label for="hallazgos" class="text-center d-block">Resultados de exploracion fisica y estudios realizados</label>
+                            <textarea class="form-control" id="hallazgos" name="hallazgos" rows="5" placeholder="DESCRIBELOS" ></textarea>
+                        </div>
+                        <div class="col-md-12 mb-4">
+                            <label for="codigo" class="text-center d-block">Diagnostico definitivo</label>
+                            <textarea class="form-control" id="diagnostico" name="diagnostico" rows="5" placeholder="DIAGNOSTICO" ></textarea>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <label for="diagnostico" class="text-center d-block">Fecha de inicio</label>
+                            <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio" >
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <label for="fecha_primera_consulta" class="text-center d-block">Fecha de primera consulta</label>
+                            <input type="date" class="form-control" id="fecha_primera_consulta" name="fecha_primera_consulta"  >
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <label for="fecha_diagnostico" class="text-center d-block">Fecha de diagnosstico</label>
+                            <input type="date" class="form-control" id="fecha_diagnostico" name="fecha_diagnostico" >
+                        </div>
+                        <div class="row mb-4">
+                            <p style="font-weight: bolder;">Causa de atencion</p>
+                            <div class="col-md-6 mb-4">
+                                <label for="enfermedad" class="text-center d-block">ENFERMEDAD</label>
+                                <input class="form-check-input d-block mx-auto" type="checkbox" value="si" id="enfermedad" name="enfermedad_1" style="width: 2rem; height: 2rem;">
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <label for="accidente_1" class="text-center d-block">ACCIDENTE</label>
+                                <input class="form-check-input d-block mx-auto" type="checkbox" value="si" id="accidente_1" name="accidente_1" style="width: 2rem; height: 2rem;">
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb-4">
+                            <label for="descripcion_tratamiento" class="text-center d-block">Descripcion de tratamiento</label>
+                            <textarea class="form-control" id="descripcion_tratamiento" name="descripcion_tratamiento" rows="5" placeholder="DESCRIBELOS" ></textarea>
+                        </div>
+                        <div class="row mb-4">
+                            <p style="font-weight: bolder;">Tipo de padecimiento</p>
+                            <div class="col-md-3 mb-4">
+                                <label for="congenito" class="text-center d-block">Congenito</label>
+                                <input class="form-check-input d-block mx-auto" type="checkbox" value="si" id="congenito" name="congenito" style="width: 2rem; height: 2rem;">
+                            </div>
+                            <div class="col-md-3 mb-4">
+                                <label for="adquirido" class="text-center d-block">Adquirido</label>
+                                <input class="form-check-input d-block mx-auto" type="checkbox" value="si" id="adquirido" name="adquirido" style="width: 2rem; height: 2rem;">
+                            </div>
+                            <div class="col-md-3 mb-4">
+                                <label for="agudo" class="text-center d-block">Agudo</label>
+                                <input class="form-check-input d-block mx-auto" type="checkbox" value="si" id="agudo" name="agudo" style="width: 2rem; height: 2rem;">
+                            </div>
+                            <div class="col-md-3 mb-4">
+                                <label for="cronico" class="text-center d-block">Cronico</label>
+                                <input class="form-check-input d-block mx-auto" type="checkbox" value="si" id="cronico" name="cronico" style="width: 2rem; height: 2rem;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center d-block my-5">
+                        <button type="submit" class="btn btn-success" style="width: 90%;" id="next-1">
+                            Siguiente
+                        </button>
+                    </div>
+                </div>
+                <!------------------------ End step 1-------------------------->
+
+                <!------------------------step 2 ------------------------->
+                <div class="mx-auto mb-5 step" style=" width: 90%; height: auto; display: none;" id="step-2">
+                    <div class="row" style="background-color: white; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                        <div class="col-md-12 mb-1">
+                            <div style="width: auto; height: 10rem;"></div>
+                        </div>
+                        <div class="col-md-12" style="background-color: rgb(254, 255, 240);">
+                            <nav style="display: flex; justify-content: space-around; background-color: #d88846; font-size: 1.5rem; color: white;">
+                                <a href="#" id="link-bloques" style="text-decoration: none;  color: inherit;">BLOQUES</a>
+                                <a href="#" id="link-tx" style="text-decoration: none;  color: inherit;">TX</a>
+                                <a href="#" id="link-observaciones" style="text-decoration: none;  color: inherit;">OBSERVACIONES</a>
+                                <a href="#" id="link-archivos" style="text-decoration: none;  color: inherit;">ARCHIVOS</a>
+                            </nav>
+                        </div>
+                        <div class="main-menu">
+
+                        </div>
+                    </div>
+                </div>
+                <!------------------------ End step 2 ------------------------->
+
+                <!------------------------step 3 ------------------------->
+                <div class="mx-auto mb-5 step" style=" width: 90%; height: auto; display: none;" id="template-step-3">
+                    <div class="row">
+                        <div class="col-md-12 mb-4 text-center d-block">
+                            <h2 style="background-color: rgb(224, 217, 217);" class="my-4">INFORME MEDICO DE TERAPIA FISICA BLOQUE 1</h2>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label for="codigo" class="text-center d-block">Descripcion de tratamiento</label>
+                            <textarea class="form-control" id="cubiculo" name="cubiculo" rows="5" placeholder="DESCRIPCION" ></textarea>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label for="codigo" class="text-center d-block">tratamiento en gimnacio</label>
+                            <textarea class="form-control" id="gimnasio" name="gimnasio" rows="5" placeholder="DESCRIPCION" ></textarea>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label for="codigo" class="text-center d-block">Signos, Sintomas Y Exploracion Fisica</label>
+                            <textarea class="form-control" id="solicitud-estudios" name="solicitud-estudios" rows="5" placeholder="DESCRIPCION" ></textarea>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label for="codigo" class="text-center d-block">Termino de Bloque</label>
+                            <textarea class="form-control" id="solicitud-estudios" name="solicitud-estudios" rows="5" placeholder="DESCRIPCION" ></textarea>
+                        </div>
+                        <div class="col-md-12 mb-5">
+                            <label for="codigo" class="text-center d-block">Observaciones</label>
+                            <textarea class="form-control" id="solicitud-estudios" name="solicitud-estudios" rows="5" placeholder="DESCRIPCION" ></textarea>
+                        </div>
+                        <div class="row col-md-12 mb-5 d-flex justify-content-between">
+                            <div class="col-md-4 mb-5">
+                                <button id="generar-pdf" class="btn btn-success btn-round w-100" id="nuevo-bloque">Imprimir</button>
+                            </div>
+                            <div class="col-md-4 mb-5">
+                                <button type="button" class="btn btn-success btn-round w-100" id="nuevo-bloque">Nuevo Bloque</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!------------------------ End step 3 ------------------------->
+
+                <!------------------------step 4 ------------------------->
+                <div class="mx-auto mb-5 step" style=" width: 90%; height: auto; display: none;" id="template-step-4">
+                    <div class="row">
+                        <div class="col-md-4  my-4">
+                            <h2 for="codigo" class="text-center d-block" style="background-color: rgb(224, 217, 217);">TX CUBICULO</h2>
+                            <textarea class="form-control" id="tx-cubiculo" name="tx-cubiculo" rows="15" placeholder="X CUBICULO" ></textarea>
+                        </div>
+                        <div class="col-md-4 my-4">
+                            <h2 for="codigo" class="text-center d-block" style="background-color: rgb(224, 217, 217);;">TX GYM</h2>
+                            <textarea class="form-control" id="tx-gym" name="tx-gym" rows="15" placeholder="TX GYM" ></textarea>
+                        </div>
+                        <div class="col-md-4  my-4">
+                            <h2 for="codigo" class="text-center d-block" style="background-color: rgb(224, 217, 217);">TX OTROS</h2>
+                            <textarea class="form-control" id="tx-otros" name="tx-otros" rows="15" placeholder="TX OTROS" ></textarea>
+                        </div>
+                        <div class="row col-md-12 mb-5 d-flex justify-content-end">
+                            <div class="col-md-3 mb-5 mt-5">
+                                <button type="submit" class="btn btn-success btn-round w-100" id="guardar">Guardar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!------------------------ End step 4 ------------------------->
+
+                <!------------------------step 5 ------------------------->
+                <div class="mx-auto mb-5 step" style=" width: 90%; height: auto; display: none;" id="template-step-5">
+                    <div class="row">
+                        <div class="col-md-12  my-4">
+                            <h2 for="codigo" class="text-center d-block" style="background-color: rgb(224, 217, 217);">OBSERVACIONES</h2>
+                            <textarea class="form-control" id="tx-cubiculo" name="tx-cubiculo" rows="15" placeholder="COMENTARIOS" ></textarea>
+                        </div>
+                        <div class="row col-md-12 mb-5 d-flex justify-content-end">
+                            <div class="col-md-3 mb-5 mt-5">
+                                <button type="submit" class="btn btn-success btn-round w-100" id="guardar">Guardar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!------------------------ End step 5 ------------------------->
+
+                <!------------------------step 6 ------------------------->
+                <div class="mx-auto mb-5 step" style="width: 90%; height: auto; display: none;" id="template-step-6">
+                    <div class="col-md-12 my-4">
+                        <h2 class="text-center d-block" style="background-color: #e0d9d9;">Subir Archivos</h2>
+                        <input type="file" id="archivo" class="form-control" accept="image/*, .pdf, .doc, .docx" multiple onchange="agregarArchivos()">
+                        
+                        <!-- Contenedor donde se mostrarán las vistas previas -->
+                        <div id="vista-previa" class="mt-3" style="border: 1px solid rgb(170, 167, 167); padding: 10px; height: 15rem; overflow-y: auto;" placeholder="Archivos Cargados">
+                            <!-- Aquí aparecerán las vistas previas de los archivos -->
+                        </div>
+                        <div class="row col-md-12 mb-5 d-flex justify-content-end">
+                            <div class="col-md-3 mb-5 mt-5">
+                                <button type="submit" class="btn btn-success btn-round w-100" id="guardar">Guardar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!------------------------ End step 6 ------------------------->      
+            </div>
+        </div>
+    </form>
+</div> 
+
+<script>
+    $(document).ready(function() {
+        // Función para mostrar el siguiente paso
+        function showStep(stepId) {
+            $('.step').hide();  // Oculta todos los pasos
+            $(stepId).show();   // Muestra el paso correspondiente
+        }
+
+        function validateStep(stepId) {
+            var isValid = true;
+            $(stepId + ' :input[required]').each(function() {
+                if (!$(this).val()) {
+                    isValid = false;
+                    $(this).addClass('is-invalid');
+                } else {
+                    $(this).removeClass('is-invalid');
+                }
+            });
+            return isValid;
+        }
+
+        $('#next-1').on('click', function() {
+            if (validateStep('#step-1')) {
+                showStep('#step-2');
+            }
+        });
+
+        // Botones "Anterior" para regresar al paso anterior
+        $('#prev-2').on('click', function() {
+            showStep('#step-1');
+        });
+
+        $('#prev-3').on('click', function() {
+            showStep('#step-2');
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        // Función para cargar contenido en main-menu
+        function loadContent(templateId) {
+            var content = $(templateId).html();  // Obtener el contenido de la plantilla
+            $('.main-menu').html(content);  // Cargar el contenido en el contenedor .main-menu
+        }
+
+        // Eventos de clic para los enlaces del paso 2
+        $('#link-bloques').on('click', function() {
+            loadContent('#template-step-3');  // Cargar el contenido de BLOQUES
+        });
+
+        $('#link-tx').on('click', function() {
+            loadContent('#template-step-4');  // Cargar el contenido de TX
+        });
+
+        $('#link-observaciones').on('click', function() {
+            loadContent('#template-step-5');  // Cargar el contenido de OBSERVACIONES
+        });
+
+        $('#link-archivos').on('click', function() {
+            loadContent('#template-step-6');  // Cargar el contenido de ARCHIVOS
+        });
+    });
+</script>
+<script>
+    let archivosSubidos = []; // Lista para almacenar los archivos subidos  
+    function agregarArchivos() {
+        var archivosNuevos = document.getElementById('archivo').files;
+        var vistaPrevia = document.getElementById('vista-previa');
+        
+        // Añadir los archivos nuevos a la lista de archivos subidos
+        for (var i = 0; i < archivosNuevos.length; i++) {
+            archivosSubidos.push(archivosNuevos[i]);
+        }
+        // Limpiar la vista previa
+        vistaPrevia.innerHTML = ''; 
+        // Mostrar todos los archivos subidos, incluyendo los nuevos
+        archivosSubidos.forEach(function(archivo, index) {
+            var reader = new FileReader();
+            reader.onload = function(event) {
+                var tipoArchivo = archivo.type;
+    
+                var divArchivo = document.createElement('div');
+                divArchivo.style.marginBottom = '10px';
+    
+                // Mostrar vista previa de la imagen
+                if (tipoArchivo.startsWith('image/')) {
+                    var img = document.createElement('img');
+                    img.src = event.target.result;
+                    img.style.maxWidth = '100%';
+                    img.style.height = 'auto';
+                    divArchivo.appendChild(img);
+                } else if (tipoArchivo === 'application/pdf' || tipoArchivo === 'application/msword' || tipoArchivo === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
+                    // Crear un enlace para descargar archivos no imagen
+                    var enlace = document.createElement('a');
+                    enlace.href = event.target.result;
+                    enlace.textContent = archivo.name;
+                    enlace.style.display = 'block';
+                    divArchivo.appendChild(enlace);
+                }
+                vistaPrevia.appendChild(divArchivo);
+            };
+    
+            reader.readAsDataURL(archivo);
+        });
+    
+        // Limpiar el input para permitir seleccionar los mismos archivos de nuevo si es necesario
+        document.getElementById('archivo').value = '';
+    }
+    </script>
+
+    <script>
+        document.getElementById('generar-pdf').addEventListener('click', function() {
+        // Crear una instancia de jsPDF
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+    
+        // Capturar los datos de los inputs, selects y textareas
+        const antecedentesQuirurgicos = document.getElementById('antecedentes-quirurgicos').value;
+        const antecedentesPatologicos = document.getElementById('antecedentes-patologicos').value;
+        const medicamentos = document.getElementById('medicamentos').value;
+        const mecanismo = document.getElementById('mecanismo').value;
+        const solicitudEstudios = document.getElementById('solicitud-estudios').value;
+        const diagnosticoDefinitivo = document.getElementById('diagnostico-definitivo').value;
+        const fechaInicio = document.getElementById('fecha-de-inicio').value;
+        const fechaConsulta = document.getElementById('fecha-de-primera-consulta').value;
+        const fechaDiagnostico = document.getElementById('fecha-de-diagnosstico').value;
+    
+        // Añadir contenido al PDF
+        doc.setFontSize(12);
+        doc.text('Antecedentes Quirúrgicos: ' + antecedentesQuirurgicos, 10, 10);
+        doc.text('Antecedentes Patológicos: ' + antecedentesPatologicos, 10, 20);
+        doc.text('Medicamentos: ' + medicamentos, 10, 30);
+        doc.text('Mecanismo de Lesión: ' + mecanismo, 10, 40);
+        doc.text('Solicitud de Estudios: ' + solicitudEstudios, 10, 50);
+        doc.text('Diagnóstico Definitivo: ' + diagnosticoDefinitivo, 10, 60);
+        doc.text('Fecha de Inicio: ' + fechaInicio, 10, 70);
+        doc.text('Fecha de Primera Consulta: ' + fechaConsulta, 10, 80);
+        doc.text('Fecha de Diagnóstico: ' + fechaDiagnostico, 10, 90);
+    
+        // Guardar el PDF con el nombre deseado
+        doc.save('reporte_medico.pdf');
+        });
+    </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+    document.getElementById('generar-pdf').addEventListener('click', function() {
+        try {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Capturar los datos de los campos del formulario
+            const antecedentesQuirurgicos = document.getElementById('antecedentes-quirurgicos').value;
+            const antecedentesPatologicos = document.getElementById('antecedentes-patologicos').value;
+            const medicamentos = document.getElementById('medicamentos').value;
+            const mecanismo = document.getElementById('mecanismo').value;
+            const solicitudEstudios = document.getElementById('solicitud-estudios').value;
+            const diagnosticoDefinitivo = document.getElementById('diagnostico-definitivo').value;
+            const fechaInicio = document.getElementById('fecha-de-inicio').value;
+            const fechaConsulta = document.getElementById('fecha-de-primera-consulta').value;
+            const fechaDiagnostico = document.getElementById('fecha-de-diagnosstico').value;
+
+            // Verificar que todos los campos requeridos no estén vacíos
+            if (!antecedentesQuirurgicos || !antecedentesPatologicos || !medicamentos || !mecanismo || !solicitudEstudios || !diagnosticoDefinitivo || !fechaInicio || !fechaConsulta || !fechaDiagnostico) {
+                throw new Error("Por favor, completa todos los campos antes de generar el PDF.");
+            }
+
+            // Crear el contenido del PDF
+            doc.setFontSize(12);
+            doc.text('Antecedentes Quirúrgicos: ' + antecedentesQuirurgicos, 10, 10);
+            doc.text('Antecedentes Patológicos: ' + antecedentesPatologicos, 10, 20);
+            doc.text('Medicamentos: ' + medicamentos, 10, 30);
+            doc.text('Mecanismo de Lesión: ' + mecanismo, 10, 40);
+            doc.text('Solicitud de Estudios: ' + solicitudEstudios, 10, 50);
+            doc.text('Diagnóstico Definitivo: ' + diagnosticoDefinitivo, 10, 60);
+            doc.text('Fecha de Inicio: ' + fechaInicio, 10, 70);
+            doc.text('Fecha de Primera Consulta: ' + fechaConsulta, 10, 80);
+            doc.text('Fecha de Diagnóstico: ' + fechaDiagnostico, 10, 90);
+
+            // Guardar el PDF
+            doc.save('reporte_medico.pdf');
+            alert('PDF generado con éxito');
+        } catch (error) {
+            // Si hay un error, mostrar una alerta con el mensaje del error
+            alert('Error al generar el PDF: ' + error.message);
+        }
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        var pacienteId = null;
+
+        function loadPage(href) {
+            $('#main-content-paciente').load(href, function() {
+                if (pacienteId !== null && typeof initEditarPaciente === 'function') {
+                    initEditarPaciente(pacienteId);
+                }
+            });
+        }
+
+        function updateLinksWithPatientId(id) {
+            pacienteId = id;
+            $('#expediente-link').data('id', id);
+            $('#edit-link').data('id', id);
+            $('#delete-link').data('id', id);
+        }
+
+        $(document).on('click', '#expediente-link', function(e) {
+            e.preventDefault();  
+            pacienteId = $(this).data('id');  
+            console.log("ID del paciente para expediente: " + pacienteId);  
+            loadPage('pages/pacientes/expediente_paciente.html');
+        });
+
+        $(document).on('click', '#delete-link', function(e) {
+            e.preventDefault();  
+            console.log("Eliminar paciente con ID: " + pacienteId);
+        });
+
+        updateLinksWithPatientId(163); 
+    });
+
+    function initEditarPaciente(pacienteId) {
+        console.log("ID del paciente obtenido en archivo_paciente: " + pacienteId);
+
+        $.ajax({
+            url: 'http://5.161.211.225/v3/assets/php/obtener_paciente.php',
+            type: 'GET',
+            data: { id: pacienteId },
+            dataType: 'json',
+            success: function(data) {
+                console.log(data); // Añade esta línea para verificar la respuesta
+                if (data.success) {
+                    $('#id_paciente').val(data.paciente.id);
+                    $('#nombre').text(data.paciente.nombre + ' ' + data.paciente.apellidos);
+                    $('#codigo').text(data.paciente.codigo);
+                    $('#codigo1').val(data.paciente.codigo);
+                    $('#telefono').val(data.paciente.telefono);
+                    $('#celular').val(data.paciente.celular);
+                    $('#correo_electronico').val(data.paciente.correo_electronico);
+                    $('#comentarios').val(data.paciente.comentarios);
+                    $('#fotografia').attr('src', './foto/' + data.paciente.fotografia);
+                } else {
+                    alert('Error al obtener los datos del paciente: ' + data.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+                alert('Ocurrió un error al obtener los datos del paciente.');
+            }
+        });
+    }
+</script>
+<script>
+    $(document).ready(function() {
+        $('#crear-archivo-form').on('submit', function(e) {
+            e.preventDefault(); // Evita que el formulario se envíe de la manera tradicional
+
+            $.ajax({
+                url: 'http://5.161.211.225/v3/assets/php/crear_archivo.php',
+                type: 'POST',
+                data: $(this).serialize(), // Serializa los datos del formulario
+                success: function(response) {
+                    console.log("respuesta del servidor crear archivo php");
+                    var result = JSON.parse(response);
+                    if (result.success) {
+                        alert(result.message);
+                    } else {
+                        alert(result.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    alert('Error en la solicitud AJAX: ' + error);
+                }
+            });
+        });
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const txCubiculo = document.getElementById('tx-cubiculo');
+        const txGym = document.getElementById('tx-gym');
+        const txOtros = document.getElementById('tx-otros');
+        const guardarBtn = document.getElementById('guardar');
+    
+        guardarBtn.addEventListener('click', function(event) {
+            event.preventDefault();
+    
+            const data = {
+                tx: txCubiculo.value.trim(),
+                tx2: txGym.value.trim(),
+                tx3: txOtros.value.trim(),
+                tx4: '' // Aquí se puede agregar el cuarto campo si se necesita
+            };
+    
+            // Simular una llamada AJAX para obtener datos de la base de datos
+            fetch('http://5.161.211.225/v3/obtener_tx')
+                .then(response => response.json())
+                .then(result => {
+                    let fieldToUpdate = 'tx'; // Inicialmente `tx` es el campo que se actualizará
+    
+                    // Verificar cuál campo está vacío y asignar los datos
+                    if (result.tx) {
+                        fieldToUpdate = 'tx2';
+                        if (result.tx2) {
+                            fieldToUpdate = 'tx3';
+                            if (result.tx3) {
+                                fieldToUpdate = 'tx4';
+                                if (result.tx4) {
+                                    // Si todos los campos están llenos
+                                    alert('Todos los campos están llenos.');
+                                    return;
+                                }
+                            }
+                        }
+                    }
+    
+                    // Actualizar el campo correspondiente con el nuevo valor
+                    if (fieldToUpdate === 'tx') txCubiculo.value = data.tx;
+                    else if (fieldToUpdate === 'tx2') txGym.value = data.tx;
+                    else if (fieldToUpdate === 'tx3') txOtros.value = data.tx;
+                    // `tx4` se podría manejar aquí si es necesario
+    
+                    // Opcional: Enviar los datos al servidor si se requiere
+                    // fetch('http://5.161.211.225/v3/actualizar_tx', {
+                    //     method: 'POST',
+                    //     headers: { 'Content-Type': 'application/json' },
+                    //     body: JSON.stringify(data)
+                    // });
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    });
+    </script>

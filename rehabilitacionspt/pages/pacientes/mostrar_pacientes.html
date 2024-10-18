@@ -1,0 +1,211 @@
+
+        <div class="container" id="main-content-usuario">
+            <div class="row" style="display: flex; justify-content: end; padding-top: 2rem;" >
+                <div class="col-sm-6 col-md-3">
+                    <a href="pages/pacientes/crea_paciente.html" class="card card-stats card-round">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col-icon">
+                                    <div
+                                        class="icon-big text-center icon-primary bubble-shadow-small"
+                                    >
+                                        <i class="fas fa-user-plus"></i>
+                                    </div>
+                                </div>
+                                <div class="col col-stats ms-3 ms-sm-0">
+                                    <div class="numbers">
+                                        <p class="card-category">Nuevo</p>
+                                        <h4 class="card-title">Paciente</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <a class="card card-stats card-round">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col-icon">
+                                    <div
+                                        class="icon-big text-center icon-info bubble-shadow-small"
+                                    >
+                                        <i class="fas fa-users"></i>
+                                    </div>
+                                </div>
+                                <div class="col col-stats ms-3 ms-sm-0">
+                                    <div class="numbers">
+                                        <p class="card-category">Buscar</p>
+                                        <h4 class="card-title">Foto</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                        
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table
+                                id="basic-datatables"
+                                class="display table table-striped table-hover"
+                                >
+                                    <thead>
+                                        <tr>
+                                            <th>Fotografia</th>
+                                            <th>Nombre</th>
+                                            <th>Apellidos</th>
+                                            <th>Telefono</th>
+                                            <th>Correo</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function() {
+                // Función para cargar la página en el contenedor #main-content-usuario
+                function loadPage(href) {
+                    $('#main-content-usuario').load(href);
+                }
+                // También puedes agregar otros enlaces de la misma manera
+                $('a[href="pages/pacientes/crea_paciente.html"]').on('click', function(e) {
+                    e.preventDefault(); 
+                    loadPage($(this).attr('href'));
+                });
+                
+                // También puedes agregar otros enlaces de la misma manera
+                $('a[href="./pages/pacientes/informe_paciente.html"]').on('click', function(e) {
+                    e.preventDefault(); 
+                    loadPage($(this).attr('href'));
+                });
+            });
+        </script>
+
+        <script>
+        $(document).ready(function() {
+                var table = $('#basic-datatables').DataTable({
+                    "ajax": {
+                        "url": "http://5.161.211.225/v3/assets/php/obtener_pacientes.php",  // Cambiar según tu ruta real
+                        "dataSrc": ""
+                    },
+                    "columns": [
+                        { "data": "fotografia", "render": function(data, type, row) {
+                            return `
+                                <a href="#" class="link-editar" data-id="${row.id}">
+                                    <img src="${data}" class="avatar-img rounded-circle" style="width: 50px; height: 50px;">
+                                </a>
+                            `;
+                        }},
+                        { "data": "nombre" },
+                        { "data": 'apellidos'},
+                        { "data": "telefono" },
+                        { "data": "correo_electronico" },
+                        {
+                            "data": null,
+                            "render": function(data, type, row) {
+                                return `
+                                    <div class="button-container">
+                                        <a href="#" class="btn btn-success btn-cita" data-id="${row.id}">Cita</a>
+                                        <a href="#" class="btn btn-success btn-editar" data-id="${row.id}">Editar</a>
+                                        <button type="button" class="btn btn-success">Pago</button>
+                                        <a href="#" class="btn btn-success btn-eliminar" data-id="${row.id}">Eliminar</a>
+                                    </div>
+                                    
+                                `;
+                            }
+                        }
+                    ]
+                });
+            });
+
+            // ------------------- Enla Cita --------------------------//
+            $('#basic-datatables tbody').on('click', '.btn-cita', function(e) {
+                e.preventDefault();  
+                var pacienteId = $(this).data('id');  
+                console.log("ID del paciente: " + pacienteId); 
+
+                $('#main-content-usuario').load('pages/pacientes/cita_paciente.html', function() {
+                    $('#main-content-usuario').data('pacienteId', pacienteId);
+                    if (typeof initEditarPaciente === 'function') {
+                        initEditarPaciente(pacienteId);
+                    }
+                });
+            });
+            function initCitaPaciente(pacienteId) {
+                console.log("Inicializando la cita para el paciente con ID: " + pacienteId);
+            }
+
+              // -------------------End Enla Cita --------------------------//
+            
+              // ------------------- Enlace Archivo --------------------------//
+            $('#basic-datatables tbody').on('click', '.link-editar', function(e) {
+                e.preventDefault();  
+                var pacienteId = $(this).data('id');  
+                console.log("ID del paciente: " + pacienteId); 
+
+                $('#main-content-usuario').load('pages/pacientes/archivo_paciente.html', function() {
+                    $('#main-content-usuario').data('pacienteId', pacienteId);
+                    if (typeof initEditarPaciente === 'function') {
+                        initEditarPaciente(pacienteId);
+                    }
+                });
+            });
+
+            // -------------------End Enlace Archivo --------------------------//
+
+            // ------------------- Enlace Editar --------------------------//
+            $('#basic-datatables tbody').on('click', '.btn-editar', function(e) {
+                e.preventDefault();  
+                var pacienteId = $(this).data('id');  
+                console.log("ID del paciente: " + pacienteId); 
+
+                $('#main-content-usuario').load('pages/pacientes/modificar_paciente.html', function() {
+                    $('#main-content-usuario').data('pacienteId', pacienteId);
+                    if (typeof initEditarPaciente === 'function') {
+                        initEditarPaciente(pacienteId);
+                    }
+                });
+            });
+            function initCitaPaciente(pacienteId) {
+                console.log("Inicializando la cita para el paciente con ID: " + pacienteId);
+            }
+             // ------------------- End Enlace Editar --------------------------//
+
+              // ------------------- Enlace Eliminar --------------------------//
+            $('#basic-datatables tbody').on('click', '.btn-eliminar', function(e) {
+                e.preventDefault();  
+                var pacienteId = $(this).data('id');  
+                console.log("ID del paciente: " + pacienteId); 
+                // Realizar la solicitud AJAX para actualizar el estado del paciente
+                $.ajax({
+                    url: 'http://5.161.211.225/v3/assets/php/eliminar_paciente.php',
+                    type: 'POST',
+                    data: { pacienteId: pacienteId },
+                    success: function(response) {
+                        console.log(response);
+                        // Si es necesario, puedes recargar el contenido o actualizar la interfaz aquí
+                        $('#main-content-usuario').load('http://5.161.211.225/v3/pages/pacientes/mostrar_pacientes.php');
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error al actualizar el estado del paciente: " + error);
+                    }
+                });
+            });
+             // ------------------- End Enlace Eliminar --------------------------//
+        </script>

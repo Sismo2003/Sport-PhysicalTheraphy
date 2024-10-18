@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pacientes</title>
+    <style>
+        .step-container {
+            display: none;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .step-container.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container mt-5">
+        <form id="multi-step-form-medico" action="/assets/php/crear_medico.php" method="POST">
+            <!-- Step 1: Datos Personales -->
+            <div class="step-container active card card-stats card-round" id="step-1">
+                <div class="button-derecha">
+                    <button class="button-foto" id="foto" name="foto" value="./assets/img/chadengle.jpg">Foto</button>
+                </div>
+                <h6 style="font-weight: 200;">Datos Personales</h6>
+                <div class="form-group">
+                    <div class="col-md-8 mb-4">
+                        <input type="text" class="form-control mb-4" id="codigo-medico" placeholder="CODIGO" name="codigo-medico">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <input type="text" class="form-control mb-4" id="nombre-medico" placeholder="NOMBRE" name="nombre-medico">
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <input type="text" class="form-control" id="apellidos-medico" name="apellidos-medico" placeholder="APELLIDOS">
+                        </div>
+                        <div class="col-md-3 mb-4">
+                            <input type="number" class="form-control" id="telefono-medico" name="telefono-medico" placeholder="TELEFONO">
+                        </div>
+                        <div class="col-md-3 mb-4">
+                            <input type="number" class="form-control" id="celular-medico" name="celular-medico" placeholder="CELULAR">
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <input type="email" class="form-control" id="correo-medico" name="correo-medico" placeholder="CORREO">
+                        </div>
+                    </div>
+                </div>
+                <div class="button-derecha">
+                    <button type="button" class="btn btn-success btn-round" id="next-1">Siguiente</button>
+                </div>
+            </div>
+    
+            <!-- Step 2: Dirección -->
+            <div class="step-container card card-stats card-round" id="step-2">
+                <div class="form-group">
+                    <input type="text" class="form-control mb-4" id="direccion-medico" name="direccion-medico" placeholder="DIRECCIÓN Y NÚMERO">
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <input type="text" class="form-control" id="colonia-medico" name="colonia-medico" placeholder="COLONIA">
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <input type="text" class="form-control" id="ciudad-medico" name="ciudad-medico" placeholder="CIUDAD">
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <input type="number" class="form-control" id="codigo-postal-medico" name="codigo-postal-medico"  placeholder="CÓDIGO POSTAL">
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <input type="text" class="form-control" id="estado-medico" name="estado-medico" placeholder="ESTADO">
+                        </div>
+                    </div>
+                </div>
+                <div class="button-derecha">
+                    <button type="button" class="btn btn-success btn-round" id="prev-2">Anterior</button>
+                    <button type="button" class="btn btn-success btn-round" id="next-2">Siguiente</button>
+                </div>
+            </div>
+
+            <!-- Step 3: Consulta -->
+            <div class="step-container card card-stats card-round" id="step-3">
+                <h6 style="font-weight: 200;">Consulta</h6>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <input type="text" class="form-control mb-4" id="especialidad-medico" name="especialidad-medico" placeholder="ESPECIALIDAD">
+                        </div>
+                    </div>
+                </div>
+                <div class="button-derecha">
+                    <button type="button" class="btn btn-success btn-round" id="prev-3">Anterior</button> <!-- Cambiado de prev-4 a prev-3 -->
+                    <button type="submit" class="btn btn-success btn-round">
+                        <span class="btn-label">
+                            <i class="fa fa-save"></i>
+                        </span>
+                        Guardar
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+    <!-- Incluye la versión completa de jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            // Función para cambiar al siguiente paso
+            $('#next-1').on('click', function() {
+                $('#step-1').removeClass('active');
+                $('#step-2').addClass('active');
+            });
+    
+            $('#next-2').on('click', function() {
+                $('#step-2').removeClass('active');
+                $('#step-3').addClass('active');
+            });
+    
+            // Función para volver al paso anterior
+            $('#prev-2').on('click', function() {
+                $('#step-2').removeClass('active');
+                $('#step-1').addClass('active');
+            });
+    
+            $('#prev-3').on('click', function() {
+                $('#step-3').removeClass('active');
+                $('#step-2').addClass('active');
+            });
+        });
+    </script>
+    
+    <script>
+        document.getElementById('multi-step-form-medico').addEventListener('submit', function(event) {
+            event.preventDefault(); // Evita el envío normal del formulario
+            
+            // Validar campos necesarios
+            if (document.getElementById('nombre-medico').value.trim() === '') {
+                alert('Por favor, ingrese el nombre del medico.');
+                return;
+            }
+    
+            // Realiza la solicitud AJAX
+            var formData = new FormData(this);
+    
+            fetch('http://5.161.211.225/v3/assets/php/crear_medico.php', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Medico creado exitosamente');
+                    window.location.href = 'http://5.161.211.225/v3/index.html'; // Redirige a la página de éxito
+                } else {
+                    alert('Hubo un error: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Ocurrió un error inesperado.');
+            });
+        });
+    </script>
+</body>
+</html>

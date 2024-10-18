@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+      body {
+          background-image: url('/assets/img/2.jpg'); /* Cambia esta URL a la ruta de tu imagen */
+          background-size: cover;
+          background-position: center;
+          height: 100vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+      }
+
+      .login-container {
+           background-color: #fff;/* Fondo blanco semi-transparente para el formulario */
+          padding: 20px;
+          border-radius: 8px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+          width: 100%;
+          max-width: 400px; /* Puedes ajustar el ancho máximo */
+      }
+  </style>
+</head>
+<body>
+    <div class="container">
+      <div login-container>
+        <div class="row justify-content-center">
+          <div class="col-md-4">
+              <h2 class="text-center">Login</h2>
+              <form id="loginForm">
+                  <div class="form-group p-3">
+                      <label for="username">Username:</label>
+                      <input type="text" class="form-control" id="username" name="username" required>
+                  </div>
+                  <div class="form-group">
+                      <label for="password">Password:</label>
+                      <input type="password" class="form-control" id="password" name="password" required>
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-block">Login</button>
+                  <div id="error-message" class="text-danger mt-2"></div>
+              </form>
+          </div>
+      </div>
+      </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#loginForm').submit(function(event) {
+                event.preventDefault();  // Evitar el envío por defecto del formulario
+
+                var username = $('#username').val();
+                var password = $('#password').val();
+
+                $.ajax({
+                    url: 'http://5.161.211.225/v3/assets/php/login.php',  // Reemplaza con la URL de tu endpoint de autenticación
+                    type: 'POST',
+                    data: { username: username, password: password },
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data.success) {
+                            // Redirigir al usuario a la página principal
+                            window.location.href = 'inicio.html';  // Reemplaza con la URL de tu págna principal
+                        } else {
+                            // Mostrar mensaje de error
+                            $('#error-message').text(data.message);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error:', error);
+                        $('#error-message').text('Ocurrió un error al procesar la solicitud.');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

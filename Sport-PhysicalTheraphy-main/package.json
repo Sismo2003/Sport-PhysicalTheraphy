@@ -1,0 +1,26 @@
+{
+  "devDependencies": {
+    "tailwindcss": "^3.4.14"
+  },
+  "dependencies": {
+    "chart.js": "^4.4.5",
+    "flowbite": "^2.5.2"
+  },
+  "name": "sport-physicaltheraphy",
+  "version": "1.0.0",
+  "description": "proyecto para sport&therapy physical",
+  "main": "tailwind.config.js",
+  "scripts": {
+    "test": "run dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sismo2003/Sport-PhysicalTheraphy.git"
+  },
+  "author": "sismo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sismo2003/Sport-PhysicalTheraphy/issues"
+  },
+  "homepage": "https://github.com/Sismo2003/Sport-PhysicalTheraphy#readme"
+}

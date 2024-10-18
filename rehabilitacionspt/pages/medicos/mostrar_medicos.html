@@ -1,0 +1,102 @@
+
+    <div class="container" id="main-content-medico">
+        <div class="row" style="display: flex; justify-content: end; padding-top: 2rem;" >
+            <div class="col-sm-6 col-md-3">
+                <a href="pages/medicos/crear_medico.html" class="card card-stats card-round">
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col-icon">
+                                <div
+                                    class="icon-big text-center icon-primary bubble-shadow-small"
+                                >
+                                    <i class="fas fa-user-plus"></i>
+                                </div>
+                            </div>
+                            <div class="col col-stats ms-3 ms-sm-0">
+                                <div class="numbers">
+                                    <p class="card-category">Nuevo</p>
+                                    <h4 class="card-title">Medico</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Medicos</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table
+                            id="basic-datatables"
+                            class="display table table-striped table-hover"
+                            >
+                                <thead>
+                                    <tr>
+                                        <th>Fotografia</th>
+                                        <th>Codigo</th>
+                                        <th>Nombre</th>
+                                        <th>Apellidos</th>
+                                        <th>Telefono</th>
+                                        <th>Correo Electronico</th>
+                                        <th>Especialidad</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Función para cargar la página en el contenedor #main-content-usuario
+            function loadPage(href) {
+                $('#main-content-medico').load(href);
+            }
+            // Corrección: Se añadió el ] faltante en el selector
+            $('a[href="pages/medicos/crear_medico.html"]').on('click', function(e) {
+                e.preventDefault(); 
+                loadPage($(this).attr('href')); 
+            });
+
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            // Inicializar DataTables
+            
+            $('#basic-datatables').DataTable({
+                "ajax": {
+                    "url": "http://5.161.211.225/v3/assets/php/obtener_medicos.php", // Cambia la ruta si es necesario
+                    "dataSrc": ""
+                },
+                "columns": [
+                    { "data": "fotografia", "render": function(data, type, row) {
+                        return '<img src="' + data + '" class="avatar-img rounded-circle" style="width: 50px; height: 50px;">';
+                    }},
+                    { "data": "codigo" },
+                    { "data": "nombre" },
+                    { "data": "apellidos" },
+                    { "data": "telefono" },
+                    { "data": "correo_electronico" },
+                    { "data":'especialidad' }
+                ]
+            });
+        });
+    </script>
+    <!-- <script>
+        $(document).ready(function () {
+            $("#basic-datatables").DataTable({});
+        });
+    </script> -->

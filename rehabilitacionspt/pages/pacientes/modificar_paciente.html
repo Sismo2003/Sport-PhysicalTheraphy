@@ -1,0 +1,261 @@
+
+    <div class="container" id="main-content-paciente">
+        <form id="editar-paciente-form">
+            <div>
+                <input type="hidden" id="paciente_id" name="paciente_id" value="">
+                <div class="row p-5">
+                    <div class="col-md-4 mb-4">
+                        <div class="button-foto" id="fotografia" name="fotografia">Foto</div>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                        <label for="codigo">Codigo:</label>
+                        <input type="text" class="form-control mb-4" id="codigo"  name="codigo">
+                    </div>
+                </div>
+            </div>
+            <div class="step-container card card-stats card-round p-5" id="step-4">
+                <h6 style="font-weight: 200;">Facturación</h6>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-12 mb-4">
+                            <label for="nombre">Nombre:</label>
+                            <input type="text" class="form-control mb-4" id="nombre" placeholder="NOMBRE DE PACIENTE" name="nombre">
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label for="apellidos">Apellidos:</label>
+                            <input type="text" class="form-control" id="apellidos" name="apellidos" placeholder="APELLIDOS">
+                        </div>
+                        <div class="col-md-2 mb-4">
+                            <label for="edad">Edad:</label>
+                            <input type="number" class="form-control" id="edad" name="edad" placeholder="EDAD">
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <label for="telefono">telefono:</label>
+                            <input type="number" class="form-control" id="telefono" name="telefono" placeholder="TELEFONO">
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label for="celular">Celular:</label>
+                            <input type="number" class="form-control" id="celular" name="celular" placeholder="CELULAR">
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label for="correo_electronico">Correo electromico:</label>
+                            <input type="email" class="form-control" id="correo_electronico" name="correo_electronico" placeholder="CORREO">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-container card card-stats card-round p-5" id="step-2">
+                <h6 style="font-weight: 200;">Dirección Paciente</h6>
+                <div class="form-group">
+                    <label for="direccion">Direccion:</label>
+                    <input type="text" class="form-control mb-4" id="direccion" name="direccion" placeholder="DIRECCIÓN Y NÚMERO">
+                    <div class="row">
+                        <div class="col-md-8 mb-4">
+                            <label for="colonia">Colonia:</label>
+                            <input type="text" class="form-control" id="colonia" name="colonia" placeholder="COLONIA">
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <label for="cp">Codigo Postal:</label>
+                            <input type="number" class="form-control" id="cp" name="cp"  placeholder="CÓDIGO POSTAL">
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label for="ciudad">Ciudad:</label>
+                            <input type="text" class="form-control" id="ciudad" name="ciudad" placeholder="CIUDAD">
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label for="estado">Estado:</label>
+                            <input type="text" class="form-control" id="estado" name="estado" placeholder="ESTADO">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-container card card-stats card-round p-5" id="step-3">
+                <h6 style="font-weight: 200;">Consulta</h6>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <label for="aseguradora">Aseguradora:</label>
+                            <input type="text" class="form-control mb-4" id="aseguradora" name="aseguradora" placeholder="ASEGURADORA">
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label for="medico">Medico:</label>
+                            <input type="text" class="form-control" id="medico" name="medico" placeholder="MEDICO TRATANTE">
+                        </div>
+                        <div class="col-md-12 mb-4">
+                            <label for="comentarios">Comentarios:</label>
+                            <textarea class="form-control" id="comentarios" name="comentarios"  rows="5" placeholder="COMENTARIOS DEL PACIENTE">
+                            </textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="step-container card card-stats card-round p-5" id="step-4">
+                <h6 style="font-weight: 200;">Facturacion</h6>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-5 mb-4">
+                            <label for="rfc">RFC:</label>
+                            <input type="text" class="form-control mb-4" id="rfc" name="rfc" placeholder="RFC">
+                        </div>
+                        <div class="col-md-7 mb-4">
+                            <label for="razon_social">Razon social:</label>
+                            <input type="text" class="form-control" id="razon_social" name="razon_social" placeholder="DENOMINACION/RAZON SOCIAL">
+                        </div>
+                        <div class="col-md-12 mb-4">
+                            <label for="dom_fiscal">Domocilio Fiscal:</label>
+                            <input type="text" class="form-control" id="dom_fiscal" name="dom_fiscal" placeholder="DIRECCION Y NUMERO">
+                        </div>
+                        <div class="col-md-8 mb-4">
+                            <label for="col_fiscal">Colonia Fiscal:</label>
+                            <input type="text" class="form-control" id="col_fiscal" name="col_fiscal" placeholder="COLONIA">
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <label for="cp_fiscal">Codigo postal fiscal:</label>
+                            <input type="number" class="form-control" id="cp_fiscal" name="cp_fiscal" placeholder="CODIGO POSTAL">
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <label for="cd_fiscal">Ciudad Fiscal:</label>
+                            <input type="text" class="form-control" id="cd_fiscal" name="cd_fiscal" placeholder="CIUDAD">
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <label for="edo_fiscal">Estado Fiscal:</label>
+                            <input type="text" class="form-control" id="edo_fiscal" name="edo_fiscal" placeholder="ESTADO">
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <label for="correo_fiscal">Correo fiscal:</label>
+                            <input type="text" class="form-control" id="correo_fiscal" name="correo_fiscal" placeholder="CORREO FISCAL">
+                        </div>
+                    </div>
+                </div>
+                <div class="button-derecha">
+                    <button type="submit" class="btn btn-success btn-round">
+                        <span class="btn-label">
+                            <i class="fa fa-save"></i>
+                        </span>
+                        Guardar
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        $(document).ready(function() {
+            var pacienteId = null;
+
+            function loadPage(href) {
+                $('#main-content-paciente').load(href, function() {
+                    if (pacienteId !== null && typeof initEditarPaciente === 'function') {
+                        initEditarPaciente(pacienteId);
+                    }
+                });
+            }
+
+            function updateLinksWithPatientId(id) {
+                pacienteId = id;
+                $('#expediente-link').data('id', id);
+                $('#edit-link').data('id', id);
+                $('#delete-link').data('id', id);
+            }
+
+            // Manejar el clic en el enlace para "Expediente"
+            $(document).on('click', '#expediente-link', function(e) {
+                e.preventDefault();  // Evita el comportamiento por defecto del enlace
+
+                pacienteId = $(this).data('id');  // Obtener el ID del paciente seleccionado
+                console.log("ID del paciente para expediente: " + pacienteId);  // Depuración
+
+                // Cargar la página de expediente del paciente en el contenedor #main-content-paciente
+                loadPage('pages/pacientes/expediente_paciente.html');
+            });
+
+            // Manejar el clic en el enlace para "Eliminar paciente"
+            $(document).on('click', '#delete-link', function(e) {
+                e.preventDefault();  // Evita el comportamiento por defecto del enlace
+                console.log("Eliminar paciente con ID: " + pacienteId);
+                // Aquí podrías agregar la lógica para eliminar el paciente
+            });
+
+            // Ejemplo de asignación del ID del paciente
+            // Llama esta función con el ID del paciente cuando se seleccione un paciente
+            updateLinksWithPatientId(163);  // Reemplaza 163 con el ID real del paciente seleccionado
+        });
+
+        function initEditarPaciente(pacienteId) {
+            console.log("ID del paciente obtenido en editar_paciente: " + pacienteId);
+
+            $.ajax({
+                url: 'http://5.161.211.225/v3/assets/php/obtener_paciente.php',
+                type: 'GET',
+                data: { id: pacienteId },
+                dataType: 'json',
+                success: function(data) {
+                    if (data.success) {
+                        $('#paciente_id').val(data.paciente.id);
+                        $('#codigo').val(data.paciente.codigo);
+                        $('#nombre').val(data.paciente.nombre);
+                        $('#apellidos').val(data.paciente.apellidos);
+                        $('#edad').val(data.paciente.edad);
+                        $('#direccion').val(data.paciente.direccion);
+                        $('#colonia').val(data.paciente.colonia);
+                        $('#ciudad').val(data.paciente.ciudad);
+                        $('#estado').val(data.paciente.estado);
+                        $('#cp').val(data.paciente.cp);
+                        $('#telefono').val(data.paciente.telefono);
+                        $('#celular').val(data.paciente.celular);
+                        $('#correo_electronico').val(data.paciente.correo_electronico);
+                        $('#comentarios').val(data.paciente.comentarios);
+                        $('#rfc').val(data.paciente.rfc);
+                        $('#razon_social').val(data.paciente.razon_social);
+                        $('#dom_fiscal').val(data.paciente.dom_fiscal);
+                        $('#col_fiscal').val(data.paciente.col_fiscal);
+                        $('#cd_fiscal').val(data.paciente.cd_fiscal);
+                        $('#edo_fiscal').val(data.paciente.edo_fiscal);
+                        $('#cp_fiscal').val(data.paciente.cp_fiscal);
+                        $('#correo_fiscal').val(data.paciente.correo_fiscal);
+                        $('#fotografia').val(data.paciente.fotografia);
+                        $('#medico').val(data.paciente.medico);
+                        $('#aseguradora').val(data.paciente.aseguradora);
+                    } else {
+                        alert('Error al obtener los datos del paciente: ' + data.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error 1:', error);
+                    alert('Ocurrió un error al obtener los datos del paciente.');
+                }
+            });
+        }
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#editar-paciente-form').on('submit', function(e) {
+                e.preventDefault();
+                var formData = $(this).serialize();
+    
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://5.161.211.225/v3/assets/php/editar_paciente.php',
+                    data: formData,
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.success) {
+                            alert('Datos actualizados correctamente');
+                            setTimeout(() => {
+                                window.location.href = 'http://5.161.211.225/v3/inicio.html'; 
+                            }, 3000);
+                        } else {
+                            alert('Error: ' + response.message);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        alert('Error en la solicitud: ' + error);
+                    }
+                });
+            });
+
+            
+        });
+    </script>

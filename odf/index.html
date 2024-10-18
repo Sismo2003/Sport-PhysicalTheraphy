@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generar PDF</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Formulario</h1>
+    <div>
+        <form id="miFormulario">
+            <div>
+                <label>Código</label>
+                <input type="text" placeholder="CÓDIGO" id="mi_codigo" required>
+            </div>
+            <div>
+                <button type="button" id="generarPdfBtn">Generar PDF</button>
+            </div>
+        </form>
+    </div>
+    
+    <script>
+        $(document).on('click', '#generarPdfBtn', function() {
+            const formData = new FormData();
+            const codigo = $('#mi_codigo').val();
+            formData.append('codigo', codigo); // Agregar el código al FormData
+            
+            $.ajax({
+                type: 'POST',
+                url: 'generar_pdf.php',
+                data: formData,
+                processData: false, // No procesar datos
+                contentType: false, // No establecer contentType
+                dataType: 'json', // Esperar respuesta en JSON
+                success: function(response) {
+                    if (response.pdf) {
+                        const blob = new Blob([new Uint8Array(atob(response.pdf).split("").map(c => c.charCodeAt(0)))], { type: 'application/pdf' });
+                        const url = window.URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = 'historial_clinico.pdf';
+                        document.body.appendChild(a);
+                        a.click();
+                        a.remove();
+                    } else {
+                        console.error(response.message || 'No se pudo generar el PDF.');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error en la solicitud:', error);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

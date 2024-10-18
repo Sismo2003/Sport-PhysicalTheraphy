@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Paciente</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container" id="main-content-paciente">
+        <div class="row step-container card card-stats card-round" style="display: flex; justify-content: end; padding-top: 2rem;" >
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <label for="codigo">Atecedentes quirurgicos:</label>
+                        <input type="text" class="form-control mb-4" id="quirurgicos"  name="quirurgicos" laceholder="Antecedentes Quirurgicos">
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <label for="nombre">Antecedentes Patologicos:</label>
+                        <input type="text" class="form-control mb-4" id="Patologicos" placeholder="Antecedentes Patologicos" name="Patologicos">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <label for="nombre">Alcohol</label>
+                        <div class="form-check">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                value=""
+                                id="alcohol"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <label for="nombre">Fuma</label>
+                        <div class="form-check">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                value=""
+                                id="fuma"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <label for="nombre">Estupefaciente</label>
+                        <div class="form-check">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                value=""
+                                id="estupefaciente"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-4">
+                        <label for="nombre">Medicamentos</label>
+                        <input type="email" class="form-control" id="medicamentos" name="medicamentos" placeholder="medicamentos">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="step-container card card-stats card-round" id="step-2">
+            <div class="form-group">
+                <div class="col-md-12 mb-4">
+                    <label for="nombre">SIGNOS, SINTOMAS Y MECANISMO DE LESION</label>
+                    <textarea class="form-control" id="sintomas" name="sintomas"  rows="5" placeholder="SINTOMAS">
+                    </textarea>
+                </div>
+                <div class="row">
+                    <div class="col-md-5 mb-4">
+                        <label for="nombre">SOLICITUD DE ESTUDIOS</label>
+                        <input type="text" class="form-control" id="estudios" name="estudios" placeholder="estudios" >
+                    </div>
+                    <div class="col-md-3 mb-4">
+                        <label for="nombre">RESULTADOS DE EXPLORACION FISICA Y ESTUDIOS REALIZADOS</label>
+                        <input type="number" class="form-control" id="hallazgos" name="hallazgos"  placeholder="hallazgos">
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <label for="nombre">DIAGNOSTICO DEFINITIVO</label>
+                        <input type="text" class="form-control" id="diagnostico" name="diagnostico" placeholder="diagnostico" >
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="step-container card card-stats card-round" id="step-3">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <label for="nombre">FECHA DE INICIO</label>
+                        <input type="date" class="form-control mb-4" id="fecha_inicio" name="fecha_inicio" placeholder="ASEGURADORA" >
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <label for="nombre">FECHA DE PRIMERA CONSULTA</label>
+                        <input type="date" class="form-control" id="fecha_primera_consulta" name="fecha_primera_consulta" placeholder="MEDICO TRATANTE" >
+                    </div>
+                    <div class="col-md-12 mb-4">
+                        <label for="nombre">FECHA DE DIAGNOSTICO</label>
+                        <input type="date" class="form-control" id="fecha_diagnostico" name="fecha_diagnostico" placeholder="MEDICO TRATANTE" >
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="step-container card card-stats card-round" id="step-4">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-12 mb-4">
+                        <label for="nombre">CAUSA DE ATENCION</label>
+                        <div class="row">
+                            <div class="col-md-4 mb-4">
+                                <label for="nombre">ENFERMEDAD</label>
+                                <div class="form-check">
+                                    <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        value=""
+                                        id="enfermedad_1"
+                                    />
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4"></div>
+                            <label for="nombre">ACCIDENTE</label>
+                            <div class="form-check">
+                                <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    value=""
+                                    id="accidente_1"
+                                />
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7 mb-4">
+                        <label for="nombre">DESCRIPCION DE TRATAMIENTO</label>
+                        <input type="text" class="form-control" id="descripcion_tratamiento" name="descripcion_tratamiento" placeholder="descripcion del tratamiento">
+                    </div>
+                    <div class="col-md-12 mb-4">
+                        <label for="nombre">TIPO DE PADECIMIENTO</label>
+                        <div class="col-md-4 mb-4"></div>
+                        <label for="nombre">congenito</label>
+                        <div class="form-check">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                value=""
+                                id="congenito"
+                            />
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <label for="nombre">adquirido</label>
+                            <div class="form-check">
+                                <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    value=""
+                                    id="adquirido"
+                                />
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <label for="nombre">agudo</label>
+                            <div class="form-check">
+                                <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    value=""
+                                    id="agudo"
+                                />
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <label for="nombre">cronico</label>
+                            <div class="form-check">
+                                <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    value=""
+                                    id="cronico"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="row step-container card card-stats card-round" style="display: flex; justify-content: end; padding-top: 2rem;" >
+            <div class="form-group">
+                
+            </div>
+        </div>
+    
+    </div>
+
+    <script>
+        // Función que se ejecuta cuando la página de editar se carga
+        function initEditarPaciente(pacienteId) {
+            console.log("ID del paciente obtenido en editar_paciente: " + pacienteId);  // Depuración
+    
+            // Realizar la solicitud AJAX para obtener los datos del paciente
+            $.ajax({
+                url: 'http://5.161.211.225/v3/assets/php/obtener_paciente.php',
+                type: 'GET',
+                data: { id: pacienteId },
+                dataType: 'json',
+                success: function(data) {
+                    if (data.success) {
+                        // Llenar los campos del formulario con los datos del paciente
+                        $('#codigo').val(data.paciente.codigo);
+                        $('#nombre').val(data.paciente.nombre);
+                        $('#apellidos').val(data.paciente.apellidos);
+                        $('#edad').val(data.paciente.edad);
+                        $('#direccion').val(data.paciente.direccion);
+                        $('#colonia').val(data.paciente.colonia);
+                        $('#ciudad').val(data.paciente.ciudad);
+                        $('#estado').val(data.paciente.estado);
+                        $('#cp').val(data.paciente.cp);
+                        $('#telefono').val(data.paciente.telefono);
+                        $('#celular').val(data.paciente.celular);
+                        $('#correo_electronico').val(data.paciente.correo_electronico);
+                        $('#comentarios').val(data.paciente.comentarios);
+                        $('#rfc').val(data.paciente.rfc);
+                        $('#razon_social').val(data.paciente.razon_social);
+                        $('#dom_fiscal').val(data.paciente.dom_fiscal);
+                        $('#col_fiscal').val(data.paciente.col_fiscal);
+                        $('#cd_fiscal').val(data.paciente.cd_fiscal);
+                        $('#edo_fiscal').val(data.paciente.edo_fiscal);
+                        $('#cp_fiscal').val(data.paciente.cp_fiscal);
+                        $('#correo_fiscal').val(data.paciente.correo_fiscal);
+                        $('#fotografia').val(data.paciente.fotografia);
+                        $('#medico').val(data.paciente.medico);
+                        $('#aseguradora').val(data.paciente.aseguradora);
+                        
+                    } else {
+                        alert('Error al obtener los datos del paciente: ' + data.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                    alert('Ocurrió un error al obtener los datos del paciente.');
+                }
+            });
+        }
+    </script>
+    <script>
+        $(document).ready(function() {
+            // Función para cargar la página en el contenedor #main-content-paciente
+            function loadPage(href) {
+                $('#main-content-paciente').load(href);
+            }
+    
+            // Manejar el clic en el enlace para "Expediente"
+            $(document).on('click', 'a[href="pages/pacientes/expediente_paciente.html"]', function(e) {
+                e.preventDefault();  // Evita el comportamiento por defecto del enlace
+    
+                var pacienteId = $(this).data('id');  // Obtener el ID del paciente seleccionado
+                console.log("ID del paciente: " + pacienteId);  // Depuración
+    
+                // Cargar la página de expediente del paciente en el contenedor #main-content-paciente
+                $('#main-content-paciente').load('pages/pacientes/expediente_paciente.html', function() {
+                    // Una vez que la página se ha cargado, establecer el ID del paciente en un atributo de la página
+                    $('#main-content-paciente').data('pacienteId', pacienteId);
+    
+                    // Si la página cargada contiene el script para inicializar el paciente, llamar a la función
+                    if (typeof initEditarPaciente === 'function') {
+                        initEditarPaciente(pacienteId);
+                    }
+                });
+            });
+    
+            // Manejar el clic en el enlace para "Informe"
+            $(document).on('click', 'a[href="pages/pacientes/informe_paciente.html"]', function(e) {
+                e.preventDefault();
+                loadPage($(this).attr('href'));
+            });
+        });
+    </script>
+</body>
+</html>

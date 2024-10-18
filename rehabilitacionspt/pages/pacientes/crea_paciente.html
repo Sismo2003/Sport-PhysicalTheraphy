@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pacierntes</title>
+    <style>
+        .step-container {
+            display: none;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .step-container.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <form id="multi-step-form" action="/assets/php/crear_usuario.php" method="POST">
+            <!-- Step 1: Datos Personales -->
+            <div class="step-container active card card-stats card-round" id="step-1">
+                <div class="button-derecha">
+                    <button class="button-foto" id="foto" name="foto" value="./assets/img/chadengle.jpg">Foto</button>
+                    <button class="btn btn-primary btn-fill pull-right" onclick="abrirCamara();">
+                        <i class="nc-icon nc-camera-compact"></i>
+                            <p>Abrir Camara</p>
+                    </button>
+                </div>
+                <div>
+                    <button onclick="abrirCamara()">Abrir Cámara</button>
+                    <!-- Contenedor para la cámara -->
+                    <div id="my_camera" style="display:none;"></div>
+
+                    <!-- Contenedor para los botones -->
+                    <div id="pre_take_buttons" style="display:none;">
+                        <button onclick="preview_snapshot()">Tomar Foto</button>
+                    </div>
+
+                    <div id="post_take_buttons" style="display:none;">
+                        <button onclick="save_photo()">Guardar Foto</button>
+                        <button onclick="cancel_preview()">Cancelar</button>
+                    </div>
+
+                    <!-- Contenedor para mostrar la imagen capturada -->
+                    <div id="results"></div>
+
+                    <!-- Campo oculto para almacenar la URL de la imagen -->
+                    <input type="hidden" id="img_url" name="img_url">
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-4 mb-4">
+                            <input type="text" class="form-control" id="codigo-paciente" name="codigo-paciente" placeholder="CODIGO" required>
+                        </div>
+                        <h6 style="font-weight: 200;">Datos Personales</h6>
+                        <div class="col-md-12 mb-4">
+                            <input type="text" class="form-control mb-4" id="nombre-paciente" placeholder="NOMBRE DE PACIENTE" name="nombre-paciente" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10 mb-4">
+                            <input type="text" class="form-control" id="apellidos-paciente" name="apellidos-paciente" placeholder="APELLIDOS" required>
+                        </div>
+                        <div class="col-md-2 mb-4">
+                            <input type="number" class="form-control" id="edad-paciente" name="edad-paciente" placeholder="EDAD" required>
+                        </div>
+                        <div class="col-md-3 mb-4">
+                            <input type="number" class="form-control" id="telefono-paciente" name="telefono-paciente" placeholder="TELEFONO" required>
+                        </div>
+                        <div class="col-md-3 mb-4">
+                            <input type="number" class="form-control" id="celular-paciente" name="celular-paciente" placeholder="CELULAR" required>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <input type="email" class="form-control" id="correo-paciente" name="correo-paciente" placeholder="CORREO" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="button-derecha">
+                    <button type="button" class="btn btn-success btn-round" id="next-1">Siguiente</button>
+                </div>
+            </div>
+    
+            <!-- Step 2: Dirección -->
+            <div class="step-container card card-stats card-round" id="step-2">
+                <h6 style="font-weight: 200;">Dirección Paciente</h6>
+                <div class="form-group">
+                    <input type="text" class="form-control mb-4" id="direccion-paciente" name="direccion-paciente" placeholder="DIRECCIÓN Y NÚMERO" required>
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <input type="text" class="form-control" id="colonia-paciente" name="colonia-paciente" placeholder="COLONIA" required>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <input type="text" class="form-control" id="ciudad-paciente" name="ciudad-paciente" placeholder="CIUDAD" required>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <input type="number" class="form-control" id="codigo-postal-paciente" name="codigo-postal-paciente" placeholder="CÓDIGO POSTAL" required>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <input type="text" class="form-control" id="estado-paciente" name="estado-paciente" placeholder="ESTADO" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="button-derecha">
+                    <button type="button" class="btn btn-success btn-round" id="prev-2">Anterior</button>
+                    <button type="button" class="btn btn-success btn-round" id="next-2">Siguiente</button>
+                </div>
+            </div>
+    
+            <!-- Step 3: Consulta -->
+            <div class="step-container card card-stats card-round" id="step-3">
+                <h6 style="font-weight: 200;">Consulta</h6>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <input type="text" class="form-control mb-4" id="aseguradora-paciente" name="aseguradora-paciente" placeholder="ASEGURADORA" required>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <input type="text" class="form-control" id="medico-Tratante-paciente" name="medico-Tratante-paciente" placeholder="MEDICO TRATANTE" required>
+                        </div>
+                        <div class="col-md-12 mb-4">
+                            <textarea class="form-control" id="comment" name="comment" rows="5" placeholder="COMENTARIOS DEL PACIENTE" required></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="button-derecha">
+                    <button type="button" class="btn btn-success btn-round" id="prev-3">Anterior</button>
+                    <button type="button" class="btn btn-success btn-round" id="next-3">Siguiente</button>
+                </div>
+            </div>
+    
+            <!-- Step 4: Facturacion y envio de datos-->
+            <div class="step-container card card-stats card-round" id="step-4">
+                <h6 style="font-weight: 200;">Facturación</h6>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-12 mb-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    ¿Los datos de facturación son los mismos del paciente?
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-5 mb-4">
+                            <input type="text" class="form-control mb-4" id="rfc" name="rfc" placeholder="RFC">
+                        </div>
+                        <div class="col-md-7 mb-4">
+                            <input type="text" class="form-control" id="razon-social" name="razon-social" placeholder="DENOMINACIÓN/RAZÓN SOCIAL">
+                        </div>
+                        <div class="col-md-12 mb-4">
+                            <input type="text" class="form-control" id="direccion_dos" name="direccion_dos" placeholder="DIRECCIÓN Y NÚMERO">
+                        </div>
+                        <div class="col-md-8 mb-4">
+                            <input type="text" class="form-control" id="colonia_dos" name="colonia_dos" placeholder="COLONIA">
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <input type="number" class="form-control" id="codigo_postal_dos" name="codigo_postal_dos" placeholder="CÓDIGO POSTAL">
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <input type="text" class="form-control" id="ciudad_dos" name="ciudad_dos" placeholder="CIUDAD">
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <input type="text" class="form-control" id="estado_dos" name="estado_dos" placeholder="ESTADO">
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <input type="text" class="form-control" id="correo_fiscal" name="correo_fiscal" placeholder="CORREO">
+                        </div>
+                    </div>
+                </div>
+                <div class="button-derecha">
+                    <button type="button" class="btn btn-success btn-round" id="prev-4">Anterior</button>
+                    <button type="submit" class="btn btn-success btn-round">
+                        <span class="btn-label">
+                            <i class="fa fa-save"></i>
+                        </span>
+                        Guardar
+                    </button>
+                </div>
+                <div id="alert-container"></div>
+            </div>
+        </form>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script>
+
+    
+    <script>
+        $(document).ready(function() {
+            // Función para cambiar al siguiente paso
+            function showStep(stepId) {
+                $('.step-container').removeClass('active');
+                $(stepId).addClass('active');
+            }
+    
+            function validateStep(stepId) {
+                var isValid = true;
+                $(stepId + ' :input[required]').each(function() {
+                    if (!$(this).val()) {
+                        isValid = false;
+                        $(this).addClass('is-invalid');
+                    } else {
+                        $(this).removeClass('is-invalid');
+                    }
+                });
+                return isValid;
+            }
+    
+            $('#next-1').on('click', function() {
+                if (validateStep('#step-1')) {
+                    showStep('#step-2');
+                }
+            });
+    
+            $('#next-2').on('click', function() {
+                if (validateStep('#step-2')) {
+                    showStep('#step-3');
+                }
+            });
+    
+            $('#next-3').on('click', function() {
+                if (validateStep('#step-3')) {
+                    showStep('#step-4');
+                }
+            });
+    
+            // Función para volver al paso anterior
+            $('#prev-2').on('click', function() {
+                showStep('#step-1');
+            });
+    
+            $('#prev-3').on('click', function() {
+                showStep('#step-2');
+            });
+    
+            $('#prev-4').on('click', function() {
+                showStep('#step-3');
+            });
+        });
+    </script>
+    
+    
+    <script>
+        document.getElementById('multi-step-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Evita el envío normal del formulario
+            
+            // Validar campos necesarios
+            if (document.getElementById('nombre-paciente').value.trim() === '') {
+                mostrarMensaje('danger', 'Por favor, ingrese el nombre del paciente.');
+                return;
+            }
+
+            // Realiza la solicitud AJAX
+            var formData = new FormData(this);
+
+            fetch('http://5.161.211.225/v3/assets/php/crear_usuario.php', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    mostrarMensaje('success', 'Paciente creado exitosamente.');
+                    setTimeout(() => {
+                        window.location.href = 'http://5.161.211.225/v3/inicio.html'; // Redirige a la página de éxito después de un tiempo
+                    }, 3000); // Redirige después de 3 segundos
+                } else {
+                    mostrarMensaje('danger', 'Hubo un error: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                mostrarMensaje('danger', 'Ocurrió un error inesperado.');
+            });
+        });
+
+        // Función para mostrar mensajes de alerta dinámicamente
+        function mostrarMensaje(tipo, mensaje) {
+            const alertContainer = document.getElementById('alert-container');
+            const alertHTML = `<div class="alert alert-${tipo} alert-dismissible fade show" role="alert">
+                                ${mensaje}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>`;
+            alertContainer.innerHTML = alertHTML;
+
+            // Eliminar automáticamente la alerta después de unos segundos
+            setTimeout(() => {
+                alertContainer.innerHTML = '';
+            }, 5000); // 5 segundos
+        }
+    </script>
+
+    <script>
+        document.getElementById('flexCheckDefault').addEventListener('change', function() {
+            if (this.checked) {
+                // Copiar los datos del paciente a los campos de facturación
+                document.getElementById('direccion_dos').value = document.getElementById('direccion-paciente').value;
+                document.getElementById('colonia_dos').value = document.getElementById('colonia-paciente').value;
+                document.getElementById('codigo_postal_dos').value = document.getElementById('codigo-postal-paciente').value;
+                document.getElementById('ciudad_dos').value = document.getElementById('ciudad-paciente').value;
+                document.getElementById('estado_dos').value = document.getElementById('estado-paciente').value;
+                document.getElementById('correo_fiscal').value = document.getElementById('correo-paciente').value;
+            } else {
+                // Limpiar los campos si se desmarca la casilla
+                document.getElementById('direccion_dos').value = '';
+                document.getElementById('colonia_dos').value = '';
+                document.getElementById('codigo_postal_dos').value = '';
+                document.getElementById('ciudad_dos').value = '';
+                document.getElementById('estado_dos').value = '';
+                document.getElementById('correo_fiscal').value = '';
+            }
+        });
+    </script>
+    <script language="JavaScript">
+        function abrirCamara(){
+            // Muestra el contenedor de la cámara
+            document.getElementById('my_camera').style.display = '';
+            // Configura la cámara
+            Webcam.set({
+                width: 320,
+                height: 240,
+                image_format: 'jpeg',
+                jpeg_quality: 90
+            });
+            // Adjunta la cámara al contenedor
+            Webcam.attach('#my_camera');
+            // Muestra los botones para tomar la foto
+            document.getElementById('pre_take_buttons').style.display = '';
+        }
+    
+        function preview_snapshot() {
+            // Congela la cámara para que el usuario pueda previsualizar la foto
+            Webcam.freeze();
+            
+            // Oculta los botones antes de tomar la foto y muestra los botones posteriores
+            document.getElementById('pre_take_buttons').style.display = 'none';
+            document.getElementById('post_take_buttons').style.display = '';
+        }
+        
+        function cancel_preview() {
+            // Cancela la previsualización y vuelve al feed en vivo
+            Webcam.unfreeze();
+            
+            // Vuelve a mostrar los botones para tomar la foto
+            document.getElementById('pre_take_buttons').style.display = '';
+            document.getElementById('post_take_buttons').style.display = 'none';
+        }
+        
+        function save_photo() {
+            // Oculta el contenedor de la cámara
+            document.getElementById('my_camera').style.display = 'none';
+            // Toma la foto y la muestra
+            Webcam.snap(function(data_uri) {
+                // Muestra la imagen capturada en el contenedor
+                document.getElementById('results').innerHTML = '<img src="'+data_uri+'"/>';
+        
+                // Almacena la URL de la imagen en un campo oculto
+                document.getElementById('img_url').value = data_uri;
+                
+                // Vuelve a mostrar los botones para tomar la foto
+                document.getElementById('pre_take_buttons').style.display = '';
+                document.getElementById('post_take_buttons').style.display = 'none';
+            });
+        }
+    </script>
+    </body>
+</html>

@@ -1,0 +1,209 @@
+
+<div class="container" id="main-content-paciente">
+
+    <div class="row p-5">
+        <div class="col-md-4 mb-4">
+            <div class="button-foto" id="fotografia" name="fotografia">Foto</div>
+        </div>
+    </div>
+    <form id="multi-step-form" action="/assets/php/crear_cita.php" method="POST">
+        <div class="step-container card card-stats card-round p-5" id="step-4">
+            <h6 style="font-weight: 200;">Datos del paciente</h6>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-2 mb-4">
+                        <label for="id">ID:</label>
+                        <input type="text" class="form-control mb-4" id="id_paciente"  name="id_paciente" disabled>
+                    </div>
+                    <div class="col-md-8 mb-4">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" class="form-control mb-4" id="nombre" placeholder="NOMBRE DE PACIENTE" name="nombre" disabled>
+                    </div>
+                    <div class="col-md-2 mb-4">
+                        <label for="nombre">Edad:</label>
+                        <input type="number" class="form-control" id="edad" name="edad" placeholder="EDAD" disabled>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <label for="nombre">Correo:</label>
+                        <input type="email" class="form-control" id="correo_electronico" name="correo_electronico" placeholder="CORREO" disabled>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <label for="nombre">Telefono:</label>
+                        <input type="number" class="form-control" id="telefono" name="telefono" placeholder="TELEFONO" disabled>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <label for="nombre">Celular:</label>
+                        <input type="number" class="form-control" id="celular" name="celular" placeholder="CELULAR" disabled>
+                    </div>
+                    <div class="col-md-12 mb-4">
+                        <label for="nombre">Datos del alta:</label>
+                        <textarea class="form-control" id="comentarios" name="comentarios"  rows="5" placeholder="COMENTARIOS DEL PACIENTE" disabled>
+                        </textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="step-container card card-stats card-round p-5" id="step-4">
+            <h6 style="font-weight: 200;">Datos de consulta</h6>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <label>Fecha de cita</label>
+                        <input type="date" class="form-control" name="fechacita" id="fechacita">
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <label>Hora de la cita</label>
+                        <input type="time" class="form-control" name="horacita" id="horacita">
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <label>categoria</label>
+                        <select class="form-select form-control" name="categoria" id="categoria">
+                            <option>SELECCIONAR</option>
+                            <option>CONSULTA</option>
+                            <option>REVALORACION</option>
+                            <option>TERAPIAFISICA</option>
+                            <option>VENDAJE FUNCIONAL</option>
+                            <option>REAVILITACION CARDIO</option>
+                        </select>
+                    </div>
+                    <div class="col-md-12 mb-4">
+                        <textarea class="form-control" id="notasconsulta" name="notasconsulta"  rows="5" placeholder="COMENTARIOS DEL PACIENTE">
+                        </textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="button-derecha">
+                <button type="submit" class="btn btn-success btn-round">
+                    <span class="btn-label">
+                        <i class="fa fa-save"></i>
+                    </span>
+                    Guardar
+                </button>
+            </div>
+            <div id="alert-container"></div>
+        </div>
+    </form>
+</div>
+<script>
+    $(document).ready(function() {
+        var pacienteId = null;
+
+        function loadPage(href) {
+            $('#main-content-paciente').load(href, function() {
+                if (pacienteId !== null && typeof initEditarPaciente === 'function') {
+                    initEditarPaciente(pacienteId);
+                }
+            });
+        }
+
+        function updateLinksWithPatientId(id) {
+            pacienteId = id;
+            $('#expediente-link').data('id', id);
+            $('#edit-link').data('id', id);
+            $('#delete-link').data('id', id);
+        }
+
+        $(document).on('click', '#expediente-link', function(e) {
+            e.preventDefault();  
+            pacienteId = $(this).data('id');  
+            console.log("ID del paciente para expediente: " + pacienteId);  
+            loadPage('pages/pacientes/expediente_paciente.html');
+        });
+
+        $(document).on('click', '#delete-link', function(e) {
+            e.preventDefault();  
+            console.log("Eliminar paciente con ID: " + pacienteId);
+        });
+
+        updateLinksWithPatientId(163); 
+    });
+
+    function initEditarPaciente(pacienteId) {
+        console.log("ID del paciente obtenido en editar_paciente: " + pacienteId);
+
+        $.ajax({
+            url: 'http://5.161.211.225/v3/assets/php/obtener_paciente.php',
+            type: 'GET',
+            data: { id: pacienteId },
+            dataType: 'json',
+            success: function(data) {
+                if (data.success) {
+                    $('#id_paciente').val(data.paciente.id);
+                    $('#nombre').val(data.paciente.nombre + data.paciente.apellidos );
+                    $('#edad').val(data.paciente.edad);
+                    $('#telefono').val(data.paciente.telefono);
+                    $('#celular').val(data.paciente.celular);
+                    $('#correo_electronico').val(data.paciente.correo_electronico);
+                    $('#comentarios').val(data.paciente.comentarios);
+                } else {
+                    alert('Error al obtener los datos del paciente: ' + data.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+                alert('Ocurrió un error al obtener los datos del paciente.');
+            }
+        });
+    }
+</script>
+
+<script>
+    document.getElementById('multi-step-form').addEventListener('submit', function(event) {
+        event.preventDefault(); 
+        const disabledElements = document.querySelectorAll('input:disabled, textarea:disabled');
+
+        // Habilitar los campos deshabilitados para que sean enviados
+        disabledElements.forEach(function(element) {
+            element.disabled = false;
+        });
+
+        var formData = new FormData(this);
+
+        fetch('http://5.161.211.225/v3/assets/php/crear_cita.php', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                mostrarMensaje('success', 'Cita creada exitosamente.');
+                setTimeout(() => {
+                    window.location.href = 'http://5.161.211.225/v3/inicio.html'; 
+                }, 3000);
+            } else {
+                mostrarMensaje('danger', 'Hubo un error: ' + data.message);
+            }
+            disabledElements.forEach(function(element) {
+                element.disabled = true;
+            });
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            mostrarMensaje('danger', 'Ocurrió un error inesperado.');
+            disabledElements.forEach(function(element) {
+                element.disabled = true;
+            });
+        });
+    });
+
+    function mostrarMensajeSiNoBloqueado(tipo, mensaje, campo) {
+        if (!campo.disabled) {
+            mostrarMensaje(tipo, mensaje);
+        }
+    }
+
+    function mostrarMensaje(tipo, mensaje) {
+        const alertContainer = document.getElementById('alert-container');
+        const alertHTML = `<div class="alert alert-${tipo} alert-dismissible fade show" role="alert">
+                            ${mensaje}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>`;
+        alertContainer.innerHTML = alertHTML;
+        setTimeout(() => {
+            alertContainer.innerHTML = '';
+        }, 5000); // 5 segundos
+    }
+</script>
