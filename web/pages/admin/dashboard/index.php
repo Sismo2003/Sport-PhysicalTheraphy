@@ -106,13 +106,13 @@
             <p class="text-md text-gray-500 ">Estos son los medicos mas recientes</p>
             <table class="display tect-center" id="medicTableDs" >
                 <thead>
-                <tr class="text-gray-700">
-                    <th class=" py-2 px-8   bg-custom-gray rounded-tl-md ">Codigo</th>
-                    <th class=" p-2  px-8   bg-custom-gray " >Nombre</th>
-                    <th class=" p-2  px-8   bg-custom-gray " >Telefono</th>
-                    <th class=" p-2  px-8   bg-custom-gray rounded-tr-md" >Especialidad</th>
-                    <!--                        <th class=" p-2 bg-custom-gray  rounded-tr-md " >Detalles</th>-->
-                </tr>
+                    <tr class="text-gray-700">
+                        <th class=" py-2 px-8   bg-custom-gray rounded-tl-md ">Codigo</th>
+                        <th class=" p-2  px-8   bg-custom-gray " >Nombre</th>
+                        <th class=" p-2  px-8   bg-custom-gray " >Telefono</th>
+                        <th class=" p-2  px-8   bg-custom-gray rounded-tr-md" >Especialidad</th>
+                        <!--                        <th class=" p-2 bg-custom-gray  rounded-tr-md " >Detalles</th>-->
+                    </tr>
                 </thead>
                 <tbody id="medicTableLoadContent">
 
@@ -123,23 +123,7 @@
 </div>
 
 <script>
-    // $('#pacientsTableDs').DataTable({
-    //     // "order": [[0, "DESC"]],
-    //     "paging": true,
-    //     "pageLength" : 15,
-    //     "lengthChange": true,
-    //     "language": { // Personalizar el texto de la interfaz
-    //         // "search": "",
-    //         // "lengthMenu": "Mostrar _MENU_ filas",
-    //         // "infoEmpty": "No hay entradas disponibles",
-    //         // "paginate": {
-    //         //     "first": "Primero",
-    //         //     "last": "Último",
-    //         //     "next": "Siguiente",
-    //         //     "previous": "Anterior"
-    //         // }
-    //     }
-    // });
+
     $(document).ready(function() {
         $.ajax({
             url : 'https://5.161.211.225/v4/web/pages/admin/dashboard/endpoint/getPacients.php',
@@ -147,27 +131,50 @@
             success : function(res){
                 console.log(res)
                 if(res.state){
-                    // data: res.data.map(function(value) {
-                    //     return [
-                    //         (value.nombre + ' ' + (value.apellido ? value.apellido : " ")) ,
-                    //         value.edad ? value.edad  : ' ',
-                    //         value.telefono ? value.telefono : value.celular,
-                    //         formatDate(value.fecha_ult_visita)
-                    //     ];
-                    // }),
-                    $.each(res.data, function(index, value) {
-                        $('#pacientsTableLoadContent').append(
-                            `
-                            <tr class="border-b-2 border-gray-200 hover:bg-gray-400">
-                                <th class="p-2   text-md font-medium text-gray-600">`+ (value.codigo) +`</th>
-                                <th class="p-2   text-md font-medium text-gray-600">`+ (value.nombre + ' ' + (value.apellido ? value.apellido : " ")) +`</th>
-                                <th class="p-2   text-md font-medium text-gray-600">` + (value.edad ? value.edad : ' ') + `</th>
-                                <th class="p-2   text-md font-medium text-gray-600">`+ (value.telefono ? value.telefono : value.celular) +`</th>
-                                <th class="p-2   text-md font-medium text-gray-600">`+ (formatDate(value.fecha_ult_visita)) +`</th>
-                            </tr>
-                            `
-                        )
+                    $('#pacientsTableDs').DataTable({
+                        // "order": [[0, "DESC"]],
+                        "paging": true,
+                        "pageLength" : 15,
+                        "lengthChange": true,
+                        data: res.data.map(function(value) {
+                            return [
+                                (value.codigo),
+                                (value.nombre + ' ' + (value.apellido ? value.apellido : " ")) ,
+                                (value.edad ? value.edad  : ' '),
+                                (value.telefono ? value.telefono : value.celular),
+                                formatDate(value.fecha_ult_visita)
+                            ];
+                        }),
+                        columnDefs : {
+                            className : "text-center bg-black"
+                        },
+                        "language": { // Personalizar el texto de la interfaz
+                            url : "https://cdn.datatables.net/plug-ins/1.13.5/i18n/es-MX.json"
+                            // "search": "",
+                            // "lengthMenu": "Mostrar _MENU_ filas",
+                            // "infoEmpty": "No hay entradas disponibles",
+                            // "paginate": {
+                            //     "first": "Primero",
+                            //     "last": "Último",
+                            //     "next": "Siguiente",
+                            //     "previous": "Anterior"
+                            // }
+                        }
                     });
+
+                    // $.each(res.data, function(index, value) {
+                    //     $('#pacientsTableLoadContent').append(
+                    //         `
+                    //         <tr class="border-b-2 border-gray-200 hover:bg-gray-400">
+                    //             <th class="p-2   text-md font-medium text-gray-600">`+ (value.codigo) +`</th>
+                    //             <th class="p-2   text-md font-medium text-gray-600">`+ (value.nombre + ' ' + (value.apellido ? value.apellido : " ")) +`</th>
+                    //             <th class="p-2   text-md font-medium text-gray-600">` + (value.edad ? value.edad : ' ') + `</th>
+                    //             <th class="p-2   text-md font-medium text-gray-600">`+ (value.telefono ? value.telefono : value.celular) +`</th>
+                    //             <th class="p-2   text-md font-medium text-gray-600">`+ (formatDate(value.fecha_ult_visita)) +`</th>
+                    //         </tr>
+                    //         `
+                    //     )
+                    // });
                 }else{
                     swal({
                         title: "Base de datos vacia",
@@ -184,6 +191,7 @@
                 });
             }
         });
+
         $.ajax({
             url : 'https://5.161.211.225/v4/web/pages/admin/dashboard/endpoint/pacientCount.php',
             method : 'GET',
@@ -207,18 +215,39 @@
             success : function(res){
                 console.log(res)
                 if(res.state){
-                    $.each(res.data, function(index, value) {
-                        $('#medicTableLoadContent').append(
-                            `
-                            <tr class="border-b-2 border-gray-200 hover:bg-gray-400">
-                                <th class="p-2  text-md font-medium text-gray-600">`+value.codigo+`</th>
-                                <th class="p-2  text-md font-medium text-gray-600">`+ (value.nombre + ' ' + (value.apellido ? value.apellido : " ")) +`</th>
-                                <th class="p-2  text-md font-medium text-gray-600">`+ (value.telefono ? value.telefono : value.celular) +`</th>
-                                <th class="p-2  text-md font-medium text-gray-600">`+value.especialidad+`</th>
-                            </tr>
-                            `
-                        )
-                    });
+                    //console.log(res.data)
+                    // $.each(res.data, function(index, value) {});
+                    $('#medicTableDs').DataTable({
+                        // "order": [[0, "DESC"]],
+                        "pageLength" : 15,
+                        "lengthChange": true,
+                        data: res.data.map(function(value) {
+                            return [
+                                (value.codigo),
+                                (value.nombre + ' ' + (value.apellidos ? value.apellidos : " ")) ,
+                                (value.telefono ? value.telefono  :  value.celular),
+                                (value.especialidad)
+                            ];
+                        }),
+                        "language": {
+                             url : "https://cdn.datatables.net/plug-ins/1.13.5/i18n/es-MX.json"
+                        },
+                        columnDefs : {
+                            className : "text-center bg-black"
+                        }
+                   });
+
+                        // $('#medicTableLoadContent').append(
+                        //     `
+                        //     <tr class="border-b-2 border-gray-200 hover:bg-gray-400">
+                        //         <th class="p-2  text-md font-medium text-gray-600">`+value.codigo+`</th>
+                        //         <th class="p-2  text-md font-medium text-gray-600">`+ (value.nombre + ' ' + (value.apellido ? value.apellido : " ")) +`</th>
+                        //         <th class="p-2  text-md font-medium text-gray-600">`+ (value.telefono ? value.telefono : value.celular) +`</th>
+                        //         <th class="p-2  text-md font-medium text-gray-600">`+value.especialidad+`</th>
+                        //     </tr>
+                        //     `
+                        // )
+
 
                 }else{
                     swal({

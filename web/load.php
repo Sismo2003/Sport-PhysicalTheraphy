@@ -4,20 +4,14 @@
     <head>
         <meta charset="UTF-8">
         <title>Sport&Theraphy Physical </title>
-
         <link href="resources/output.css" rel="stylesheet">
         <link rel="icon" href="sources/logos/spt.ico" type="image/x-icon">
-
         <script src="resources/js/jquery-3.7.1.js"></script>
-
         <script src="../node_modules/chart.js/dist/chart.umd.js"></script>
         <script src="resources/js/datatables.min.css"></script>
         <script src="resources/js/datatables.min.js"></script>
         <script src="resources/js/dashboard.js"></script>
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js"></script>
+        <script src="../node_modules/flowbite/dist/flowbite.min.js"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     </head>
     <body class="bg-slate-100 ">
